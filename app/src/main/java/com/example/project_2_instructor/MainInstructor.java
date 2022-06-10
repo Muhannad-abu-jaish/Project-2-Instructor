@@ -103,7 +103,7 @@ public class MainInstructor extends AppCompatActivity {
     }//End of ClickِAboutUs
 
 
-    public  void logout( final Activity activity)
+    public static  void logout( final Activity activity)
     {
         //Initialize alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -116,7 +116,7 @@ public class MainInstructor extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Finish activity
-                redirectActivity(MainInstructor.this,LoginInstructor.class);
+                redirectActivity(activity,LoginInstructor.class);
                 activity.finishAffinity();
                 //Exit app
                 System.exit(0);
