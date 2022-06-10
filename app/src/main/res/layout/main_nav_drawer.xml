@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main_nav_drawer"
+    >
+
+    <ImageView
+        android:id="@+id/main_nav_drawer_iv"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="16dp"
+        android:onClick="ClickLogo"
+        android:src="@drawable/main_logo"
+        tools:ignore="UsingOnClickInXml" />
+
+    <TextView
+        android:id="@+id/main_nav_drawer_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SchoolName"
+        android:textStyle="bold|italic"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/DarkMagenta"/>
+
+    <View
+        android:id="@+id/main_nav_drawer_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/DarkMagenta"/>
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="ClickHome"
+        >
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_home_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/HOME_TEXT"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_home_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/homepage"/>
+
+        <!--  app:tint="@color/DarkMagenta"-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_personal_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="ClickPersonalProfile"
+
+        >
+        <!-- android:onClick="ClickDashBoard"-->
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_personal_profile_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/PERSONAL_PROFILE"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_personal_profile_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/profile"/>
+
+
+        <!--  app:tint="@color/DarkMagenta"-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        >
+
+        <!-- android:onClick="ClickSettings"-->
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_settings_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/SETTINGS"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_settings_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/settings"/>
+        <!--  app:tint="@color/DarkMagenta"-->
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_honorary_board"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        >
+
+        <!-- android:onClick="ClickHonoraryBoard"-->
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_honorary_board_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/HONORARY_BOARD"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_honorary_board_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/star"/>
+
+        <!--  app:tint="@color/DarkMagenta"-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="ClickAboutUs"
+        >
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_about_us_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/About_Us"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_about_us_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/about_us"/>
+
+
+        <!--  app:tint="@color/DarkMagenta"-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_nav_drawer_ll_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="ClickLogOut"
+        tools:ignore="UsingOnClickInXml">
+
+        <TextView
+            android:id="@+id/main_nav_drawer_ll_logout_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/LOGOUT"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/main_nav_drawer_ll_logout_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/logout"/>
+
+        <!--  app:tint="@color/DarkMagenta"-->
+
+    </LinearLayout>
+
+    </LinearLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Project-2-Instructor</string>
+
+    <string name="SchoolName">Al-Saada High School</string>
+
+
+    //Login Activity
+    <string name="LOGIN">LOGIN</string>
+    <string name="SignIn">SIGN UP</string>
+    <string name="USERNAME">UserName</string>
+    <string name="PASSWORD">Password</string>
+    <string name="FORGOT_PASSWORD">Forgot Password</string>
+
+    //Menu
+    <string name="HOME_TEXT">Home</string>
+    <string name="PERSONAL_PROFILE">Personal Profile</string>
+    <string name="About_Us">About Us</string>
+    <string name="SETTINGS">Settings</string>
+    <string name="LOGOUT">Logout</string>
+    <string name="HONORARY_BOARD">Honorary Board</string>
+</resources>
