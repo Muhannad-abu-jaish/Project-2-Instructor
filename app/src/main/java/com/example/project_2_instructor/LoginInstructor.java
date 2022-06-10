@@ -101,11 +101,11 @@ public class LoginInstructor extends AppCompatActivity {
         editor.putString("name_class",instructors.getName_class());
         editor.putString("firstName",instructors.getFirstName());
         editor.putString("lastName",instructors.getLastName());
-        editor.putString("Email",instructors.getEmail());
+        editor.putString("Email",instructors.getUsername());
         editor.putString("Password",instructors.getPassword());
         editor.putString("token",instructors.getToken());
         System.out.println("first name: "+instructors.getFirstName()+"      last name : "+ instructors.getLastName()+"    name class : "+ instructors.getName_class());
-        System.out.println("email: "+instructors.getEmail()+"      password : "+ instructors.getPassword());
+        System.out.println("email: "+instructors.getUsername()+"      password : "+ instructors.getPassword());
 
         editor.apply();
 

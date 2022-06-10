@@ -6,23 +6,20 @@ public class Instructors {
     private String name_class;
     private String firstName;
     private String lastName;
-    private String Email;
-    private String Password;
-    private boolean Type;
+    private String username;
+    private String password;
+    private boolean type;
     private String token;
 
-
-    public Instructors() {
-    }
-
-    public Instructors(int ins_id, String name_class, String firstName, String lastName, String email, String password, boolean type) {
+    public Instructors(int ins_id, String name_class, String firstName, String lastName, String username, String password, boolean type, String token) {
         this.ins_id = ins_id;
         this.name_class = name_class;
         this.firstName = firstName;
         this.lastName = lastName;
-        Email = email;
-        Password = password;
-        Type = type;
+        this.username = username;
+        this.password = password;
+        this.type = type;
+        this.token = token;
     }
 
     public int getIns_id() {
@@ -41,16 +38,16 @@ public class Instructors {
         return lastName;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public boolean isType() {
-        return Type;
+        return type;
     }
 
     public String getToken() {
