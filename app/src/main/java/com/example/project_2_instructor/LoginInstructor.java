@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Models.API;
@@ -54,13 +55,35 @@ public class LoginInstructor extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               if(checkInputs())
                 insertLogin();
-
+               else
+                   Toast.makeText(getApplicationContext(),"Error in Inputs!!",Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    private boolean checkInputs() {
+    String email = email_et.getText().toString();
+    String password = password_et.getText().toString();
+     if(email.isEmpty()||password.isEmpty())
+    {
+        System.out.println("EMPTYYYY");
+        return false;
+    }
+     else if (email_et.getText().toString().length()<3||email_et.getText().toString().length()>10||password_et.getText()
+             .toString().length()<3||password_et.getText().toString().length()>15)
+     {
+         System.out.println("NUMMMMMM");
+         return false;
+     }
+    else if (!email.matches("[aA-zZ0-9]+")||!password.matches("[aA-zZ0-9]+"))
+    {
+        System.out.println("Char");
+        return false;
+    }
+    return true;
+    }
     public void insertLogin()
     {
 
@@ -106,7 +129,6 @@ public class LoginInstructor extends AppCompatActivity {
         editor.putString("token",instructors.getToken());
         System.out.println("first name: "+instructors.getFirstName()+"      last name : "+ instructors.getLastName()+"    name class : "+ instructors.getName_class());
         System.out.println("email: "+instructors.getUsername()+"      password : "+ instructors.getPassword());
-
         editor.apply();
 
 
