@@ -1,4 +1,4 @@
-package com.example.project_2_instructor;
+package com.example.project_2_instructor.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Models.API;
 import com.example.project_2_instructor.Models.DataLogin;
 import com.example.project_2_instructor.Models.Instructors;
+import com.example.project_2_instructor.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;

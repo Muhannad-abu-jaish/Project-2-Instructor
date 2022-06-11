@@ -1,4 +1,4 @@
-package com.example.project_2_instructor;
+package com.example.project_2_instructor.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -10,22 +10,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
+import com.example.project_2_instructor.R;
+import com.example.project_2_instructor.View.LoginInstructor;
 
 public class MainInstructor extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
+    Button LogToSchool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_instructor);
-
         initialize();
+        ClickLogging();
+
+    }
+
+    private void ClickLogging() {
+    redirectActivity(this,SectionsPage.class);
 
     }
 
     public void initialize()
     {
+        LogToSchool = findViewById(R.id.LogToSchool);
         drawerLayout = findViewById(R.id.main_instructor_drawer_layout);
     }//End of initialize
 
@@ -51,7 +62,6 @@ public class MainInstructor extends AppCompatActivity {
 
     public static void closeDrawer(DrawerLayout drawerLayout)
     {
-        System.out.println("Hello");
         //Close drawer layout
         //Check condition
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
@@ -116,7 +126,7 @@ public class MainInstructor extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Finish activity
-                redirectActivity(activity,LoginInstructor.class);
+                redirectActivity(activity, LoginInstructor.class);
                 activity.finishAffinity();
                 //Exit app
                 System.exit(0);

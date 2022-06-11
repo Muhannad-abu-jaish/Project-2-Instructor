@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
     android:layout_gravity="center"
-    tools:context=".LoginInstructor">
+    tools:context=".View.LoginInstructor">
 
     <RelativeLayout
         android:id="@+id/login_rl_logo"
