@@ -74,7 +74,7 @@
             app:boxStrokeColor="@color/DarkMagenta"
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
             app:startIconTint="@color/DarkMagenta"
-            app:passwordToggleEnabled="false"
+            app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/DarkMagenta"
 
             >

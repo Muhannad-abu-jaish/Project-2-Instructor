@@ -69,18 +69,15 @@ public class LoginInstructor extends AppCompatActivity {
     String password = password_et.getText().toString();
      if(email.isEmpty()||password.isEmpty())
     {
-        System.out.println("EMPTYYYY");
         return false;
     }
      else if (email_et.getText().toString().length()<3||email_et.getText().toString().length()>10||password_et.getText()
              .toString().length()<3||password_et.getText().toString().length()>15)
      {
-         System.out.println("NUMMMMMM");
          return false;
      }
     else if (!email.matches("[aA-zZ0-9]+")||!password.matches("[aA-zZ0-9]+"))
     {
-        System.out.println("Char");
         return false;
     }
     return true;
@@ -122,14 +119,12 @@ public class LoginInstructor extends AppCompatActivity {
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("ins_id",instructors.getIns_id());
-        editor.putString("name_class",instructors.getName_class());
+        editor.putInt("name_class",instructors.getName_class());
         editor.putString("firstName",instructors.getFirstName());
         editor.putString("lastName",instructors.getLastName());
-        editor.putString("Email",instructors.getUsername());
+        editor.putString("username",instructors.getUsername());
         editor.putString("Password",instructors.getPassword());
         editor.putString("token",instructors.getToken());
-        System.out.println("first name: "+instructors.getFirstName()+"      last name : "+ instructors.getLastName()+"    name class : "+ instructors.getName_class());
-        System.out.println("email: "+instructors.getUsername()+"      password : "+ instructors.getPassword());
         editor.apply();
 
 

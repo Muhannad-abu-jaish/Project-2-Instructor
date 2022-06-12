@@ -30,7 +30,12 @@ public class MainInstructor extends AppCompatActivity {
     }
 
     private void ClickLogging() {
-    redirectActivity(this,SectionsPage.class);
+        LogToSchool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectActivity(MainInstructor.this,SectionsPage.class);
+            }
+        });
 
     }
 
@@ -85,8 +90,7 @@ public class MainInstructor extends AppCompatActivity {
     public void ClickPersonalProfile(View view)//PersonalProfile
     {
         //Redirect activity to personal profile
-
-       // redirectActivity(this  , PersonalProfile.class );
+        redirectActivity(this  , Personal_profile.class );
 
     }//End of ClickPersonalProfile
 

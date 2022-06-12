@@ -3,7 +3,7 @@ package com.example.project_2_instructor.Models;
 public class Instructors {
 
     private int ins_id;
-    private String name_class;
+    private Integer name_class;
     private String firstName;
     private String lastName;
     private String username;
@@ -11,7 +11,7 @@ public class Instructors {
     private boolean type;
     private String token;
 
-    public Instructors(int ins_id, String name_class, String firstName, String lastName, String username, String password, boolean type, String token) {
+    public Instructors(int ins_id, int name_class, String firstName, String lastName, String username, String password, boolean type, String token) {
         this.ins_id = ins_id;
         this.name_class = name_class;
         this.firstName = firstName;
@@ -26,7 +26,7 @@ public class Instructors {
         return ins_id;
     }
 
-    public String getName_class() {
+    public Integer getName_class() {
         return name_class;
     }
 
