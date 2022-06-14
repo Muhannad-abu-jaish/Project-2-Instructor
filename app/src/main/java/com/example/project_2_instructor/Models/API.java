@@ -17,4 +17,6 @@ public interface API {
     public Call<Instructors> loginInstructor(@Body DataLogin dataLogin);
     @GET("/instructor/see_sections")
     public Call<ArrayList<Section>> seeAllSections(@Header("token") String token);
+    @GET("/instructor/see_students")
+    public Call<ArrayList<Student>> seeAllStudents(@Header("sectionID") int sec_id);
 }

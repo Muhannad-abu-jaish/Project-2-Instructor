@@ -14,13 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.Adapter_show_sections;
+import com.example.project_2_instructor.Controller.Adapter_show_students;
 import com.example.project_2_instructor.Models.API;
-import com.example.project_2_instructor.Models.Section;
+import com.example.project_2_instructor.Models.Student;
 import com.example.project_2_instructor.R;
 
 import java.util.ArrayList;
@@ -30,12 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SectionsPage extends AppCompatActivity {
-RecyclerView recyclerView;
-Adapter_show_sections adapter_show_sections;
-String mytoken ;
-SharedPreferences sharedPreferences;
-DrawerLayout drawerLayout;
+public class Students_Page extends AppCompatActivity {
+    RecyclerView recyclerView;
+    Adapter_show_students adapter_show_students;
+    int Sec_Id ;
+    Bundle bundle;
+    DrawerLayout drawerLayout;
     EditText title , messages ;
     String y ;
     String m;
@@ -45,14 +45,41 @@ DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sections_page);
+        setContentView(R.layout.activity_students__page);
         init();
-        getSections();
+        getStudents();
+    }
+    private void getStudents() {
+        API api = CONSTANT.CREATING_CALL();
+        Call<ArrayList<Student>> arrayListCall = api.seeAllStudents(Sec_Id);
+        arrayListCall.enqueue(new Callback<ArrayList<Student>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
+                if(response.isSuccessful()){
+                    adapter_show_students.setStudents(response.body());
+                    setAdapter();
+                }else{
+                    System.out.println("error succefully : " + response.errorBody());
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
+                System.out.println("Error : " + t.getMessage());
+            }
+        });
+    }
+    private void setAdapter() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
+        recyclerView.setAdapter(adapter_show_students);
+    }
+
+    public  void Click_Add_notes(View view){
+        Add_notes();
     }
 
     private void Add_notes() {
             View view2 = getLayoutInflater().inflate(R.layout.alert_add_notes_class,null);
-            AlertDialog alertDialog = new AlertDialog.Builder(SectionsPage.this)
+            AlertDialog alertDialog = new AlertDialog.Builder(Students_Page.this)
                     .setView(view2)
                     .show();
             Spinner year,month,day;
@@ -74,9 +101,9 @@ DrawerLayout drawerLayout;
             for(int i = 1 ; i<31;i++){
                 days.add(i);
             }
-            ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter(SectionsPage.this,android.R.layout.simple_list_item_1,years);
-            ArrayAdapter<Integer> monthsAdapter = new ArrayAdapter(SectionsPage.this,android.R.layout.simple_list_item_1, months);
-            ArrayAdapter<Integer> daysAdapter = new ArrayAdapter(SectionsPage.this,android.R.layout.simple_list_item_1,days);
+            ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter(Students_Page.this,android.R.layout.simple_list_item_1,years);
+            ArrayAdapter<Integer> monthsAdapter = new ArrayAdapter(Students_Page.this,android.R.layout.simple_list_item_1, months);
+            ArrayAdapter<Integer> daysAdapter = new ArrayAdapter(Students_Page.this,android.R.layout.simple_list_item_1,days);
             yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             year.setAdapter(yearsAdapter);
             monthsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -86,12 +113,12 @@ DrawerLayout drawerLayout;
             year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                y = adapterView.getItemAtPosition(i).toString();
+                    y = adapterView.getItemAtPosition(i).toString();
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-                  y = adapterView.getItemAtPosition(0).toString();
+                    y = adapterView.getItemAtPosition(0).toString();
                 }
             });
             month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -102,20 +129,20 @@ DrawerLayout drawerLayout;
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-                   m = adapterView.getItemAtPosition(0).toString();
+                    m = adapterView.getItemAtPosition(0).toString();
                 }
             });
-          day.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                  d = adapterView.getItemAtPosition(i).toString();
-              }
+            day.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    d = adapterView.getItemAtPosition(i).toString();
+                }
 
-              @Override
-              public void onNothingSelected(AdapterView<?> adapterView) {
-                d = adapterView.getItemAtPosition(0).toString();
-              }
-          });
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    d = adapterView.getItemAtPosition(0).toString();
+                }
+            });
             send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -126,46 +153,14 @@ DrawerLayout drawerLayout;
                     System.out.println("The Type : " + type + "\t Title : " + Title + "\t message : " + message + "\t exp-date : " + exp_date);
                 }
             });
-}
-
-    private void getSections() {
-        API api = CONSTANT.CREATING_CALL();
-        Call<ArrayList<Section>> arrayListCall = api.seeAllSections(mytoken);
-        arrayListCall.enqueue(new Callback<ArrayList<Section>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Section>> call, Response<ArrayList<Section>> response) {
-                if(response.isSuccessful()) {
-                    adapter_show_sections.setSections(SectionsPage.this,response.body());
-                    setAdapter();
-                }else{
-                    System.out.println("Error successfully!! "+response.code()+"\t" + response.errorBody());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Section>> call, Throwable t) {
-                System.out.println("Error : " + t.getMessage());
-            }
-        });
-
-
-}
-
-    private void setAdapter() {
-    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
-    recyclerView.setAdapter(adapter_show_sections);
     }
-
     private void init(){
-        recyclerView = findViewById(R.id.recycler_sections);
-        adapter_show_sections = new Adapter_show_sections();
-        sharedPreferences = getSharedPreferences("InstructorData",MODE_PRIVATE);
-        mytoken = sharedPreferences.getString("token","");
-        drawerLayout = findViewById(R.id.section_drawer);
-}
-public  void Click_Add_notes(View view){
-        Add_notes();
-}
+        recyclerView = findViewById(R.id.recycler_students);
+        adapter_show_students = new Adapter_show_students();
+        bundle = getIntent().getExtras();
+        Sec_Id = bundle.getInt("SectionID");
+        drawerLayout = findViewById(R.id.student_drawer);
+    }
     public void ClickMenu(View view)
     {
         //Open Drawer

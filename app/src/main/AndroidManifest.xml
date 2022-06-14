@@ -13,10 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2Instructor"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.Personal_profile"
-            android:exported="false"/>
-        <activity android:name=".View.SectionsPage"
-            android:exported="false"/>
+        <activity android:name=".View.Attendance_Students"></activity>
+        <activity android:name=".View.Students_Page" />
+        <activity android:name=".View.Choice_students" />
+        <activity
+            android:name=".View.Personal_profile"
+            android:exported="false" />
+        <activity
+            android:name=".View.SectionsPage"
+            android:exported="false" />
         <activity
             android:name=".View.MainInstructor"
             android:exported="false" />
