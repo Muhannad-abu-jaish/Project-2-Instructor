@@ -2,6 +2,7 @@ package com.example.project_2_instructor.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.resources.Compatibility;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,17 +16,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.Adapter_show_sections;
 import com.example.project_2_instructor.Controller.Adapter_show_students;
 import com.example.project_2_instructor.Models.API;
+import com.example.project_2_instructor.Models.NoteSection;
 import com.example.project_2_instructor.Models.Student;
 import com.example.project_2_instructor.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,7 +63,7 @@ public class Students_Page extends AppCompatActivity {
                     adapter_show_students.setStudents(response.body());
                     setAdapter();
                 }else{
-                    System.out.println("error succefully : " + response.errorBody());
+                    System.out.println("error successfully : " + response.errorBody());
                 }
             }
             @Override
@@ -146,11 +150,28 @@ public class Students_Page extends AppCompatActivity {
             send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    type = "To Class";
+                    type = "To Section";
                     exp_date = y + "-" + m + "-" + d;
                     Title = title.getText().toString();
                     message = messages.getText().toString();
-                    System.out.println("The Type : " + type + "\t Title : " + Title + "\t message : " + message + "\t exp-date : " + exp_date);
+                    NoteSection noteSection = new NoteSection(Title,exp_date,message);
+                    API api = CONSTANT.CREATING_CALL();
+                    Call<ResponseBody> responseBodyCall = api.sendNoteToSection(Sec_Id,noteSection);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(Students_Page.this,"Success Sending ",Toast.LENGTH_LONG).show();
+                                alertDialog.cancel();
+                            }else{
+                                System.out.println("Success Body : " + response.errorBody().toString());
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            System.out.println("Error : " + t.getMessage());
+                        }
+                    });
                 }
             });
     }

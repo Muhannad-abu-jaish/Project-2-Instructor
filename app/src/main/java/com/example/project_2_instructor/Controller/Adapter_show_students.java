@@ -31,6 +31,7 @@ public class Adapter_show_students extends RecyclerView.Adapter<Adapter_show_stu
     @Override
     public void onBindViewHolder(@NonNull Adapter_show_students.ViewHolder holder, int position) {
       holder.name_student.setText(""+students.get(position).getLast_name());
+      holder.rank.setText("%"+students.get(position).getRank());
     }
 
     @Override

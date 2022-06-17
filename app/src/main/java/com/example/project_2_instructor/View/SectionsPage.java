@@ -16,16 +16,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.Adapter_show_sections;
 import com.example.project_2_instructor.Models.API;
+import com.example.project_2_instructor.Models.NotesClass;
 import com.example.project_2_instructor.Models.Section;
 import com.example.project_2_instructor.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -123,11 +126,32 @@ DrawerLayout drawerLayout;
                     exp_date = y + "-" + m + "-" + d;
                     Title = title.getText().toString();
                     message = messages.getText().toString();
-                    System.out.println("The Type : " + type + "\t Title : " + Title + "\t message : " + message + "\t exp-date : " + exp_date);
+//                    int[] sec = new int[sections.size()+1];
+//                    for(int i = 0 ;i <sections.size();i++){
+//                        sec[i] = sections.get(i);
+//                    }
+                    NotesClass notesClass = new NotesClass(sections,Title,exp_date,message);
+                    API api = CONSTANT.CREATING_CALL();
+                    Call<ResponseBody> responseBodyCall = api.sendNoteToClass(notesClass);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(SectionsPage.this,"The Adverts is sent ",Toast.LENGTH_LONG).show();
+                                alertDialog.cancel();
+                            }else{
+                                System.out.println("Success Body : " + response.errorBody().toString());
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            System.out.println("error : " + t.getMessage());
+                        }
+                    });
                 }
             });
 }
-
+ArrayList<Integer> sections = new ArrayList<>();
     private void getSections() {
         API api = CONSTANT.CREATING_CALL();
         Call<ArrayList<Section>> arrayListCall = api.seeAllSections(mytoken);
@@ -136,6 +160,7 @@ DrawerLayout drawerLayout;
             public void onResponse(Call<ArrayList<Section>> call, Response<ArrayList<Section>> response) {
                 if(response.isSuccessful()) {
                     adapter_show_sections.setSections(SectionsPage.this,response.body());
+                    addToSections(response.body());
                     setAdapter();
                 }else{
                     System.out.println("Error successfully!! "+response.code()+"\t" + response.errorBody());
@@ -150,6 +175,12 @@ DrawerLayout drawerLayout;
 
 
 }
+
+    private void addToSections(ArrayList<Section> body) {
+    for(int i = 0 ;i < body.size();i++){
+       sections.add(body.get(i).getId());
+    }
+    }
 
     private void setAdapter() {
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));

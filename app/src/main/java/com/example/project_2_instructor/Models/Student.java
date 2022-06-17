@@ -17,6 +17,7 @@ public class Student {
     private String token;
     private int name_sec ;
     private int name_class;
+    private int rank;
 
     public int getName_sec() {
         return name_sec;
@@ -74,18 +75,16 @@ public class Student {
         return token;
     }
 
-    public Student() {
-
+    public int getRank() {
+        return rank;
     }
 
-    public Student(int sid, String first_name, String last_name, String father_name, int age, String username, String password, Date signInDate, Date birthDate, int attend_number, int absence_number, String token,int name_class ,int name_sec) {
+    public Student(int sid, String first_name, String last_name, String father_name, int age, String username, String password, Date signInDate, Date birthDate, int attend_number, int absence_number, String token, int name_sec, int name_class, int rank) {
         Sid = sid;
         this.first_name = first_name;
         this.last_name = last_name;
         this.father_name = father_name;
         this.age = age;
-        this.name_class = name_class;
-        this.name_sec = name_sec;
         this.username = username;
         this.password = password;
         this.signInDate = signInDate;
@@ -93,5 +92,8 @@ public class Student {
         this.attend_number = attend_number;
         this.absence_number = absence_number;
         this.token = token;
+        this.name_sec = name_sec;
+        this.name_class = name_class;
+        this.rank = rank;
     }
 }
