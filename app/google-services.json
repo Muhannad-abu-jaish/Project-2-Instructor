@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "445833530746",
+    "firebase_url": "https://notification-fdc24-default-rtdb.firebaseio.com",
+    "project_id": "notification-fdc24",
+    "storage_bucket": "notification-fdc24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445833530746:android:9cf1ada5a6bac57f409ac3",
+        "android_client_info": {
+          "package_name": "com.example.project_2_instructor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445833530746-55q4v5bh750qc4p98uqfsan3abeaouoa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIQhgGryjuzHC6AT-0q51Y109YEcccej4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445833530746-55q4v5bh750qc4p98uqfsan3abeaouoa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445833530746:android:342a14cd50f761f6409ac3",
+        "android_client_info": {
+          "package_name": "net.simplifiedcoding.androidnotificationtutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445833530746-55q4v5bh750qc4p98uqfsan3abeaouoa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIQhgGryjuzHC6AT-0q51Y109YEcccej4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445833530746-55q4v5bh750qc4p98uqfsan3abeaouoa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

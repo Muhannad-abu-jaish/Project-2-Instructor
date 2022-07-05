@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.project_2_instructor">
+    package="com.example.project_2_instructor"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,7 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2Instructor"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.Attendance_Students"></activity>
+        <service android:name=".Controller.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".View.StudentProfile"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+        <activity android:name=".View.Attendance_Students" />
         <activity android:name=".View.Students_Page" />
         <activity android:name=".View.Choice_students" />
         <activity

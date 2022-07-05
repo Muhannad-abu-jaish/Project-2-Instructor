@@ -12,7 +12,12 @@
     <color name="Violet">#8813e4</color>
     <color name="PrimaryBlue">#3d93d9</color>
     <color name="GreenLight">#5ff0f7</color>
-
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="profileAccentColor">#F7F7F7</color>
+    <color name="whiteTextColor">#fff</color>
+    <color name="profileBackground">#fff</color>
+    <color name="blackTextColor">#000</color>
+    <color name="profileEditTextColor">#707070</color>
 
     <color name="BluGreen">#03634c</color>
     <color name="GreenBlue">#ff11c09d</color>
