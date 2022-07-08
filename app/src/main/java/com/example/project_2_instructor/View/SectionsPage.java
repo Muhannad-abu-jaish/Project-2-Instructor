@@ -208,7 +208,9 @@ public  void Click_Add_notes(View view){
         //Open drawer layout
         drawerLayout.openDrawer(GravityCompat.START);
     }//End of open Drawer
-
+    public void ClickNotification(View view){
+        MainInstructor.redirectActivity(this,Show_Notification.class);
+    }
 
     public void ClickLogo(View view)
     {

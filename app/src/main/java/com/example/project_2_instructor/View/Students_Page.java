@@ -200,7 +200,9 @@ public class Students_Page extends AppCompatActivity {
         //Close drawer
         closeDrawer(drawerLayout);
     }//End of ClickLogo
-
+    public void ClickNotification(View view){
+         MainInstructor.redirectActivity(this,Show_Notification.class);
+    }
 
     public static void closeDrawer(DrawerLayout drawerLayout)
     {

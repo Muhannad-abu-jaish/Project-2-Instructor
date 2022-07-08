@@ -115,6 +115,9 @@ DrawerLayout drawerLayout;
         MainInstructor.logout(this);
 
     }//End of ClickِAboutUs
+    public void ClickNotification(View view){
+        MainInstructor.redirectActivity(this,Show_Notification.class);
+    }
 
 
 }

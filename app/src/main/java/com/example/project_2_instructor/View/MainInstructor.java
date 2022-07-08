@@ -85,6 +85,9 @@ public class MainInstructor extends AppCompatActivity {
         recreate();
 
     }//End of ClickHome
+    public void ClickNotification(View view){
+        redirectActivity(this,Show_Notification.class);
+    }
 
 
     public void ClickPersonalProfile(View view)//PersonalProfile

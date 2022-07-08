@@ -73,7 +73,9 @@ public class Choice_students extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }//End of ClickLogo
 
-
+    public void ClickNotification(View view){
+        MainInstructor.redirectActivity(this,Show_Notification.class);
+    }
     public static void closeDrawer(DrawerLayout drawerLayout)
     {
         //Close drawer layout
