@@ -18,7 +18,7 @@ import com.example.project_2_instructor.View.LoginInstructor;
 public class MainInstructor extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    Button LogToSchool;
+    Button LogToSchool , parentsNotes_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainInstructor extends AppCompatActivity {
         setContentView(R.layout.activity_main_instructor);
         initialize();
         ClickLogging();
-
+        clickShowParentsNote();
     }
 
     private void ClickLogging() {
@@ -39,10 +39,22 @@ public class MainInstructor extends AppCompatActivity {
 
     }
 
+    private void clickShowParentsNote()
+    {
+        parentsNotes_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                redirectActivity(MainInstructor.this , ParentsNote.class);
+            }
+        });
+    }
+
     public void initialize()
     {
         LogToSchool = findViewById(R.id.LogToSchool);
         drawerLayout = findViewById(R.id.main_instructor_drawer_layout);
+        parentsNotes_btn = findViewById(R.id.main_instructor_parents_notes_btn) ;
     }//End of initialize
 
     public void ClickMenu(View view)

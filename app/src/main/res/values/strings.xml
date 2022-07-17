@@ -18,4 +18,8 @@
     <string name="SETTINGS">Settings</string>
     <string name="LOGOUT">Logout</string>
     <string name="HONORARY_BOARD">Honorary Board</string>
+
+    //Received Message From Parents
+    <string name="RECEIVED_MESSAGE">Received Message : </string>
+    <string name="THE_PARENTS_MESSAGES">The parents messages</string>
 </resources>

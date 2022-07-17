@@ -30,6 +30,7 @@ public class LoginInstructor extends AppCompatActivity {
     TextView forgotPassword_tv;
     SharedPreferences sharedPreferences;
 
+    public static final String TOKEN = "token" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +96,7 @@ public class LoginInstructor extends AppCompatActivity {
                 {
                     saveIntoSharedPreferences(response.body());
                     MainInstructor.redirectActivity(LoginInstructor.this, MainInstructor.class);
+                    System.out.println();
                 }
                 else {
                     try {

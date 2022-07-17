@@ -27,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StudentProfile extends AppCompatActivity {
+
 TextView rankStudent , username_student,name_class,name_section,fullname_student,attendance_number,
         absence_number,age_student,birthdate_student , Back ;
 Bundle bundle;
@@ -69,7 +70,6 @@ Button  add_note_private , add_absence_warning;
                         toast.getView().setBackground(getResources().getDrawable(R.color.Pink));
                         toast.show();
                         textInputEditText.getText().clear();
-                        alertDialog.cancel();
                     }
                 }
             });

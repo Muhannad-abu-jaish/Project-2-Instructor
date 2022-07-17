@@ -27,6 +27,8 @@ public interface API {
     public Call<ArrayList<Student>> seeAllStudents(@Query("sectionID") int sec_id);*/
     @GET("/instructor/see_students/{sectionID}")
     public Call<ArrayList<Student>> seeAllStudents(@Path("sectionID") int sec_id);
+    @GET("/instructor/getComplaint")
+    public Call<ArrayList<ParentsNotes>> getComplaints(@Header("Authorization") String token) ;
     @POST("/instructor/add-note/{studentID}")
     public Call<ResponseBody> sendNoteToStudent(@Path("studentID") int student_id , @Body Note note);
     @POST("/instructor/add_class_note")
@@ -34,5 +36,6 @@ public interface API {
     @POST("/instructor/add_section_note/{sectionID}")
     public Call<ResponseBody> sendNoteToSection(@Path("sectionID") int sec_id ,
                                                 @Body NoteSection noteSection);
+
 
 }
