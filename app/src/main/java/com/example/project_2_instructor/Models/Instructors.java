@@ -2,40 +2,41 @@ package com.example.project_2_instructor.Models;
 
 public class Instructors {
 
-    private int ins_id;
-    private Integer name_class;
-    private String firstName;
-    private String lastName;
+    private int id;
+    private int name_class;
+    private String first_name;
+    private String last_name;
     private String username;
     private String password;
-    private boolean type;
+    private boolean role;
     private String token;
+    private String tokenMessage;
+    public int getId() {
+        return id;
+    }
 
-    public Instructors(int ins_id, int name_class, String firstName, String lastName, String username, String password, boolean type, String token) {
-        this.ins_id = ins_id;
+    public String getTokenMessage() {
+        return tokenMessage;
+    }
+
+    public Instructors(int id, int name_class, String first_name, String last_name, String username, String password, boolean role, String token, String tokenMessage) {
+        this.id = id;
         this.name_class = name_class;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.username = username;
         this.password = password;
-        this.type = type;
+        this.role = role;
         this.token = token;
+        this.tokenMessage = tokenMessage;
     }
 
-    public int getIns_id() {
-        return ins_id;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public Integer getName_class() {
-        return name_class;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
     public String getUsername() {
@@ -46,11 +47,17 @@ public class Instructors {
         return password;
     }
 
-    public boolean isType() {
-        return type;
+    public boolean isRole() {
+        return role;
+    }
+
+
+    public int getName_class() {
+        return name_class;
     }
 
     public String getToken() {
         return token;
     }
+
 }

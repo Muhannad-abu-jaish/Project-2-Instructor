@@ -97,6 +97,14 @@
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:minWidth">250dp</item>
     </style>
+
+
+
+
+
+
+
+
 </resources>
 <!--<resources>-->
 <!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->

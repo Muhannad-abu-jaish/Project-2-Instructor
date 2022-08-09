@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
@@ -190,7 +191,7 @@ ArrayList<Integer> sections = new ArrayList<>();
     private void init(){
         recyclerView = findViewById(R.id.recycler_sections);
         adapter_show_sections = new Adapter_show_sections();
-        sharedPreferences = getSharedPreferences("InstructorData",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB,MODE_PRIVATE);
         mytoken = sharedPreferences.getString("token","");
         drawerLayout = findViewById(R.id.section_drawer);
 }
@@ -208,9 +209,6 @@ public  void Click_Add_notes(View view){
         //Open drawer layout
         drawerLayout.openDrawer(GravityCompat.START);
     }//End of open Drawer
-    public void ClickNotification(View view){
-        MainInstructor.redirectActivity(this,Show_Notification.class);
-    }
 
     public void ClickLogo(View view)
     {

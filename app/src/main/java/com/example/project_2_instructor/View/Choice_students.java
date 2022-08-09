@@ -5,9 +5,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.project_2_instructor.R;
 
@@ -15,6 +18,8 @@ public class Choice_students extends AppCompatActivity {
   Button attendance, students ;
   Bundle bundle ;
   DrawerLayout drawerLayout;
+  SharedPreferences sharedPreferences;
+  TextView num_notification;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,12 @@ public class Choice_students extends AppCompatActivity {
         attendance = findViewById(R.id.attendance);
         bundle = getIntent().getExtras();
         drawerLayout = findViewById(R.id.choice_drawer_layout);
+        num_notification = findViewById(R.id.num_notification);
+        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB, MODE_PRIVATE);
+        if(!sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,""));
+        }
     }
     public void ClickMenu(View view)
     {
@@ -73,9 +84,6 @@ public class Choice_students extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }//End of ClickLogo
 
-    public void ClickNotification(View view){
-        MainInstructor.redirectActivity(this,Show_Notification.class);
-    }
     public static void closeDrawer(DrawerLayout drawerLayout)
     {
         //Close drawer layout

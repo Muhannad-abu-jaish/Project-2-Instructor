@@ -16,11 +16,7 @@
         <activity
             android:name=".View.ParentsNote"
             android:exported="false" />
-        <activity android:name=".View.Show_Notification" />
-
-        <service
-            android:name=".Controller.NotificationService"
-            android:exported="true">
+        <service android:name=".Controller.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

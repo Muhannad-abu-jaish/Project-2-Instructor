@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Models.API;
+import com.example.project_2_instructor.Models.Absence_Data;
 import com.example.project_2_instructor.Models.Note;
 import com.example.project_2_instructor.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -66,10 +67,33 @@ Button  add_note_private , add_absence_warning;
                        toast.show();
                     }
                     else{
-                        Toast toast = Toast.makeText(StudentProfile.this,"The Message is sent !!",Toast.LENGTH_LONG);
-                        toast.getView().setBackground(getResources().getDrawable(R.color.Pink));
-                        toast.show();
-                        textInputEditText.getText().clear();
+
+                        API api = CONSTANT.CREATING_CALL();
+                        Call<ResponseBody> responseBodyCall = api.sendAbsenceWarning(id_student,new Absence_Data(textInputEditText.getText().toString()));
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(response.isSuccessful()){
+                                    Toast toast = Toast.makeText(StudentProfile.this,"The Message is sent !!",Toast.LENGTH_LONG);
+                                    toast.getView().setBackground(getResources().getDrawable(R.color.Pink));
+                                    toast.show();
+                                    textInputEditText.getText().clear();
+                                }else{
+                                    try {
+                                        System.out.println("Error Successfully : " + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                System.out.println("error : " + t.getMessage());
+                            }
+                        });
+
+
                     }
                 }
             });

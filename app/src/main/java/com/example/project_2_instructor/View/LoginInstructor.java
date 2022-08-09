@@ -1,7 +1,10 @@
 package com.example.project_2_instructor.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +17,10 @@ import com.example.project_2_instructor.Models.API;
 import com.example.project_2_instructor.Models.DataLogin;
 import com.example.project_2_instructor.Models.Instructors;
 import com.example.project_2_instructor.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 
@@ -29,8 +35,11 @@ public class LoginInstructor extends AppCompatActivity {
     TextInputEditText email_et,password_et;
     TextView forgotPassword_tv;
     SharedPreferences sharedPreferences;
+    String tokenMessage;
 
     public static final String TOKEN = "token" ;
+    public static final String NUM_NOTIFICATION = "num_notification";
+    public static final String INSTRUCTOR_DB = "InstructorData";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +56,27 @@ public class LoginInstructor extends AppCompatActivity {
         email_et=findViewById(R.id.login_ll_1_et_email);
         password_et=findViewById(R.id.login_ll_1_et_2_password);
         forgotPassword_tv=findViewById(R.id.login_ll_1_tv_forgot_password);
-        sharedPreferences = getSharedPreferences("InstructorData",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(INSTRUCTOR_DB,MODE_PRIVATE);
+        if(sharedPreferences.getString(NUM_NOTIFICATION,"").isEmpty()){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(NUM_NOTIFICATION,"0");
+            editor.apply();
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("notification_channel", "notification_channel", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(!task.isSuccessful()){
+                    System.err.println("Error Task Message : " + task.getException());
+                }else{
+                    tokenMessage = task.getResult();
+                }
+            }
+        });
     }//End of initialize
 
 
@@ -87,7 +116,7 @@ public class LoginInstructor extends AppCompatActivity {
     {
 
         API api = CONSTANT.CREATING_CALL();
-        Call<Instructors> dataLoginCall = api.loginInstructor(new DataLogin(email_et.getText().toString(),password_et.getText().toString()));
+        Call<Instructors> dataLoginCall = api.loginInstructor(new DataLogin(email_et.getText().toString(),password_et.getText().toString(),tokenMessage));
         dataLoginCall.enqueue(new Callback<Instructors>() {
             @Override
             public void onResponse(Call<Instructors> call, Response<Instructors> response) {
@@ -95,8 +124,7 @@ public class LoginInstructor extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     saveIntoSharedPreferences(response.body());
-                    MainInstructor.redirectActivity(LoginInstructor.this, MainInstructor.class);
-                    System.out.println();
+                   MainInstructor.redirectActivity(LoginInstructor.this, MainInstructor.class);
                 }
                 else {
                     try {
@@ -120,13 +148,14 @@ public class LoginInstructor extends AppCompatActivity {
     private void saveIntoSharedPreferences(Instructors instructors)
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("ins_id",instructors.getIns_id());
+        editor.putInt("ins_id",instructors.getId());
         editor.putInt("name_class",instructors.getName_class());
-        editor.putString("firstName",instructors.getFirstName());
-        editor.putString("lastName",instructors.getLastName());
+        editor.putString("firstName",instructors.getFirst_name());
+        editor.putString("lastName",instructors.getLast_name());
         editor.putString("username",instructors.getUsername());
         editor.putString("Password",instructors.getPassword());
         editor.putString("token",instructors.getToken());
+        editor.putString("tokenMessage",instructors.getTokenMessage());
         editor.apply();
 
 

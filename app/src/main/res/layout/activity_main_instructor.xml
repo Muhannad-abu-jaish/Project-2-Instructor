@@ -38,19 +38,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include" />
-
-        <Button
-            android:id="@+id/main_instructor_parents_notes_btn"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/Navy"
-            android:text="ملاحظات الأهل ّ"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Login_btn" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     <RelativeLayout
         android:id="@+id/main_parent_drawer_layout_rl"
@@ -58,9 +45,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/White"
-
         >
-
         <include layout="@layout/main_nav_drawer" />
 
     </RelativeLayout>

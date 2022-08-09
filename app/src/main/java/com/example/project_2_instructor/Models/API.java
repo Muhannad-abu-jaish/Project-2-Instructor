@@ -36,6 +36,9 @@ public interface API {
     @POST("/instructor/add_section_note/{sectionID}")
     public Call<ResponseBody> sendNoteToSection(@Path("sectionID") int sec_id ,
                                                 @Body NoteSection noteSection);
+    @POST("/instructor/addAbsenceNote/{studentID}")
+    public Call<ResponseBody> sendAbsenceWarning(@Path("studentID") int student_id,
+                                                 @Body Absence_Data absence_data);
 
 
 }

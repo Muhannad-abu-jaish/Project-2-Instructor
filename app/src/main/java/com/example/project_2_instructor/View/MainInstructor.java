@@ -8,9 +8,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.project_2_instructor.R;
 import com.example.project_2_instructor.View.LoginInstructor;
@@ -18,7 +21,9 @@ import com.example.project_2_instructor.View.LoginInstructor;
 public class MainInstructor extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    Button LogToSchool , parentsNotes_btn;
+    Button LogToSchool ;
+    SharedPreferences sharedPreferences;
+    TextView num_notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,6 @@ public class MainInstructor extends AppCompatActivity {
         setContentView(R.layout.activity_main_instructor);
         initialize();
         ClickLogging();
-        clickShowParentsNote();
     }
 
     private void ClickLogging() {
@@ -39,23 +43,23 @@ public class MainInstructor extends AppCompatActivity {
 
     }
 
-    private void clickShowParentsNote()
-    {
-        parentsNotes_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                redirectActivity(MainInstructor.this , ParentsNote.class);
-            }
-        });
-    }
-
     public void initialize()
     {
         LogToSchool = findViewById(R.id.LogToSchool);
         drawerLayout = findViewById(R.id.main_instructor_drawer_layout);
-        parentsNotes_btn = findViewById(R.id.main_instructor_parents_notes_btn) ;
+        num_notification = findViewById(R.id.num_notification);
+        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB, MODE_PRIVATE);
+        if(!sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,""));
+        }
     }//End of initialize
+
+    public void ClickNotification(View view)
+    {
+        redirectActivity(MainInstructor.this , ParentsNote.class);
+    }
+
 
     public void ClickMenu(View view)
     {
@@ -97,9 +101,6 @@ public class MainInstructor extends AppCompatActivity {
         recreate();
 
     }//End of ClickHome
-    public void ClickNotification(View view){
-        redirectActivity(this,Show_Notification.class);
-    }
 
 
     public void ClickPersonalProfile(View view)//PersonalProfile

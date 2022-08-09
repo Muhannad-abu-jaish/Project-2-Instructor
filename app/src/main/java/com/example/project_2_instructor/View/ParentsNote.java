@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
@@ -31,7 +32,7 @@ public class ParentsNote extends AppCompatActivity {
     ParentsNotesDB parentsNotesDB ;
     DrawerLayout drawerLayout;
     String myToken;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +79,11 @@ public class ParentsNote extends AppCompatActivity {
         recyclerView = findViewById(R.id.parents_note_rv_notes);
         drawerLayout = findViewById(R.id.parents_note_drawer_layout);
         adapterParentsNote = new AdapterParentsNote(this , parentsNotes);
-        sharedPreferences = getSharedPreferences("InstructorData",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB,MODE_PRIVATE);
         myToken = sharedPreferences.getString(LoginInstructor.TOKEN,"");
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(LoginInstructor.NUM_NOTIFICATION,"0");
+        editor.apply();
         setAdapterParentsNote(adapterParentsNote); ;
     }
 

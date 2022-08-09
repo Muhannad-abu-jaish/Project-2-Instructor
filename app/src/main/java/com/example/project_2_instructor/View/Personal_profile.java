@@ -14,7 +14,7 @@ import com.example.project_2_instructor.R;
 
 public class Personal_profile extends AppCompatActivity {
 SharedPreferences sharedPreferences;
-TextView name_instructor;
+TextView name_instructor , num_notification;
 TextView name_class_instructor;
 TextView username_instructor;
 TextView password_instructor;
@@ -27,21 +27,26 @@ DrawerLayout drawerLayout;
         getData();
     }
 
-    @SuppressLint("SetTextI18n")
     private void getData() {
-        name_instructor.setText(sharedPreferences.getString("firstName","")+sharedPreferences.getString("lastName",""));
-        name_class_instructor.setText(" "+sharedPreferences.getInt("name_class",0));
+        String NAME = sharedPreferences.getString("firstName","") + sharedPreferences.getString("lastName","");
+        name_instructor.setText(NAME);
+        name_class_instructor.setText(sharedPreferences.getInt("name_class",0));
         password_instructor.setText(sharedPreferences.getString("Password",""));
         username_instructor.setText(sharedPreferences.getString("username",""));
     }
 
     private void init(){
-        sharedPreferences = getSharedPreferences("InstructorData",MODE_PRIVATE);
         name_class_instructor = findViewById(R.id.name_class_instructor);
         name_instructor = findViewById(R.id.name_Instructor);
         password_instructor = findViewById(R.id.password_instructor);
         username_instructor = findViewById(R.id.username_instructor);
         drawerLayout = findViewById(R.id.personal_profile_drawer_layout);
+        num_notification = findViewById(R.id.num_notification);
+        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB, MODE_PRIVATE);
+        if(!sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(""+sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,""));
+        }
     }
     public void ClickMenu(View view)
     {
@@ -115,9 +120,7 @@ DrawerLayout drawerLayout;
         MainInstructor.logout(this);
 
     }//End of ClickِAboutUs
-    public void ClickNotification(View view){
-        MainInstructor.redirectActivity(this,Show_Notification.class);
-    }
+
 
 
 }
