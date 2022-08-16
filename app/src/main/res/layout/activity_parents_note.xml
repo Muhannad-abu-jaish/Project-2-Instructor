@@ -19,6 +19,9 @@
             android:text="@string/THE_PARENTS_MESSAGES"
             android:gravity="center"
             android:textSize="40sp" />
+        <include layout="@layout/view_no_connection"
+            android:id="@+id/view_NoConnection"
+            android:visibility="gone"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

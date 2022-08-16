@@ -26,6 +26,7 @@ import com.example.project_2_instructor.Models.NoteSection;
 import com.example.project_2_instructor.Models.Student;
 import com.example.project_2_instructor.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,12 +47,24 @@ public class Students_Page extends AppCompatActivity {
     String d ;
     Button send;
     String exp_date , Title , message , type;
+    View noConnection;
+    Button Retry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students__page);
         init();
         getStudents();
+        RetryConnection();
+    }
+    private void RetryConnection() {
+        Retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noConnection.setVisibility(View.GONE);
+                getStudents();
+            }
+        });
     }
     private void getStudents() {
         API api = CONSTANT.CREATING_CALL();
@@ -60,15 +73,24 @@ public class Students_Page extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
                 if(response.isSuccessful()){
-                    adapter_show_students.setStudents(response.body());
-                    setAdapter();
+                    if(response.body().size()==0){
+                        noConnection.setVisibility(View.VISIBLE);
+                    }else {
+                        adapter_show_students.setStudents(response.body());
+                        setAdapter();
+                    }
                 }else{
-                    System.out.println("error successfully : " + response.errorBody());
+                    try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             @Override
             public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
                 System.out.println("Error : " + t.getMessage());
+                noConnection.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -176,6 +198,9 @@ public class Students_Page extends AppCompatActivity {
             });
     }
     private void init(){
+        Retry = findViewById(R.id.retry_connection);
+        noConnection = findViewById(R.id.view_NoConnection);
+
         recyclerView = findViewById(R.id.recycler_students);
         adapter_show_students = new Adapter_show_students();
         bundle = getIntent().getExtras();

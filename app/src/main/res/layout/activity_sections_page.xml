@@ -18,6 +18,10 @@
             android:text="الشعب المتوفّرة "
             android:gravity="center"
             android:textColor="@color/Blue"/>
+        <include layout="@layout/view_no_connection"
+            android:id="@+id/view_NoConnection"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

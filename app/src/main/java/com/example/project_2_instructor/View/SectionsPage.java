@@ -26,6 +26,7 @@ import com.example.project_2_instructor.Models.NotesClass;
 import com.example.project_2_instructor.Models.Section;
 import com.example.project_2_instructor.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,14 +47,26 @@ DrawerLayout drawerLayout;
     String d ;
     Button send;
     String exp_date , Title , message , type;
+    View noConnection;
+    Button Retry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sections_page);
         init();
         getSections();
+        RetryConnection();
     }
-
+    private void RetryConnection() {
+        Retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noConnection.setVisibility(View.GONE);
+                    getSections();
+            }
+        });
+    }
     private void Add_notes() {
             View view2 = getLayoutInflater().inflate(R.layout.alert_add_notes_class,null);
             AlertDialog alertDialog = new AlertDialog.Builder(SectionsPage.this)
@@ -160,17 +173,25 @@ ArrayList<Integer> sections = new ArrayList<>();
             @Override
             public void onResponse(Call<ArrayList<Section>> call, Response<ArrayList<Section>> response) {
                 if(response.isSuccessful()) {
-                    adapter_show_sections.setSections(SectionsPage.this,response.body());
-                    addToSections(response.body());
-                    setAdapter();
+                    if(response.body().size()==0) {
+                      noConnection.setVisibility(View.VISIBLE);
+                    }else{
+                        adapter_show_sections.setSections(SectionsPage.this, response.body());
+                        addToSections(response.body());
+                        setAdapter();
+                    }
                 }else{
-                    System.out.println("Error successfully!! "+response.code()+"\t" + response.errorBody());
+                    try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<Section>> call, Throwable t) {
                 System.out.println("Error : " + t.getMessage());
+                noConnection.setVisibility(View.VISIBLE);
             }
         });
 
@@ -189,10 +210,12 @@ ArrayList<Integer> sections = new ArrayList<>();
     }
 
     private void init(){
+        Retry = findViewById(R.id.retry_connection);
+        noConnection = findViewById(R.id.view_NoConnection);
         recyclerView = findViewById(R.id.recycler_sections);
         adapter_show_sections = new Adapter_show_sections();
         sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB,MODE_PRIVATE);
-        mytoken = sharedPreferences.getString("token","");
+        mytoken = sharedPreferences.getString(LoginInstructor.TOKEN,"");
         drawerLayout = findViewById(R.id.section_drawer);
 }
 public  void Click_Add_notes(View view){

@@ -22,4 +22,5 @@
     //Received Message From Parents
     <string name="RECEIVED_MESSAGE">Received Message : </string>
     <string name="THE_PARENTS_MESSAGES">The parents messages</string>
+    <string name="retry">retry</string>
 </resources>

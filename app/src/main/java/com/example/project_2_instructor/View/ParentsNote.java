@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.AdapterParentsNote;
@@ -33,7 +34,8 @@ public class ParentsNote extends AppCompatActivity {
     DrawerLayout drawerLayout;
     String myToken;
     SharedPreferences sharedPreferences ;
-
+    View noConnection;
+    Button Retry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,24 @@ public class ParentsNote extends AppCompatActivity {
 
         init();
         try {
+            RetryConnection();
             GET_ANNOUNCEMENT();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    private void RetryConnection() {
+        Retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noConnection.setVisibility(View.GONE);
+                try {
+                    GET_ANNOUNCEMENT();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void GET_ANNOUNCEMENT() throws InterruptedException {
@@ -54,12 +70,16 @@ public class ParentsNote extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<ParentsNotes>> call, Response<ArrayList<ParentsNotes>> response) {
                 if(response.isSuccessful()){
-                    adapterParentsNote.setParentsNotes(response.body());
-                    setAdapterParentsNote(adapterParentsNote);
-                    addParentsNoteToDataBase(response) ;
-
+                    if(response.body().size()==0){
+                     noConnection.setVisibility(View.VISIBLE);
+                    }else {
+                        adapterParentsNote.setParentsNotes(response.body());
+                        setAdapterParentsNote(adapterParentsNote);
+                        addParentsNoteToDataBase(response);
+                    }
                 }else{
                     try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                         System.out.println("Error Statues !" + response.code() + "\t Error Body : " + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -69,11 +89,13 @@ public class ParentsNote extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<ParentsNotes>> call, Throwable t) {
                 System.out.println("Error : " + t.getMessage());
+                noConnection.setVisibility(View.VISIBLE);
             }
         });
     }
     public void init(){
-
+        Retry = findViewById(R.id.retry_connection);
+        noConnection = findViewById(R.id.view_NoConnection);
         parentsNotesDB = new ParentsNotesDB(this);
         parentsNotes = parentsNotesDB.getAllPrivateNotes();
         recyclerView = findViewById(R.id.parents_note_rv_notes);

@@ -128,6 +128,7 @@ public class LoginInstructor extends AppCompatActivity {
                 }
                 else {
                     try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                         System.out.println("error successfully"+response.errorBody().string()+ response.code());
                     } catch (IOException e) {
                         e.printStackTrace();
