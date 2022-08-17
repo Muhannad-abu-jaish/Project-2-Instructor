@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
@@ -41,6 +42,7 @@ public class Students_Page extends AppCompatActivity {
     int Sec_Id ;
     Bundle bundle;
     DrawerLayout drawerLayout;
+    TextView name_tool_bar ;
     EditText title , messages ;
     String y ;
     String m;
@@ -198,6 +200,9 @@ public class Students_Page extends AppCompatActivity {
             });
     }
     private void init(){
+
+        name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv) ;
+        name_tool_bar.setText(R.string.STUDENTS);
         Retry = findViewById(R.id.retry_connection);
         noConnection = findViewById(R.id.view_NoConnection);
 
@@ -207,6 +212,7 @@ public class Students_Page extends AppCompatActivity {
         Sec_Id = bundle.getInt("SectionID");
         drawerLayout = findViewById(R.id.student_drawer);
     }
+
     public void ClickMenu(View view)
     {
         //Open Drawer
@@ -244,7 +250,7 @@ public class Students_Page extends AppCompatActivity {
     {
         //Recreate activity
         finish();
-        MainInstructor.redirectActivity(this,MainInstructor.class);
+        CONSTANT.redirectActivity(this,SectionsPage.class);
 
     }//End of ClickHome
 
@@ -253,29 +259,16 @@ public class Students_Page extends AppCompatActivity {
     {
         //Redirect activity to personal profile
         finish();
-        MainInstructor.redirectActivity(this,Personal_profile.class);
+        CONSTANT.redirectActivity(this,Personal_profile.class);
 
     }//End of ClickPersonalProfile
 
-
-
-    // يفترض أضيف ال settings
-
-
-    public void ClickAboutUs(View view)
-    {
-
-        //Redirect activity to about us
-        //finish();
-        // redirectActivity(this , AboutUs.class );
-
-    }//End of ClickِAboutUs
 
     public void ClickLogOut(View view)
     {
         System.out.println(" am in about from Main parent");
         //Close app
-        MainInstructor.logout(this);
+        CONSTANT.logout(this);
 
     }//End of ClickِAboutUs
 

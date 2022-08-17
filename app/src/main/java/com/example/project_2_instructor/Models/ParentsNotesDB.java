@@ -15,7 +15,12 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "parents_notes";
-    private static final String DATABASE_TABLE  ="parentsnotetable";
+    private static final String PARENT_NOTES_TABLE  ="parentsnotetable";
+
+
+    private static final String ABSENCE_TABLE = "absence_table" ;
+    private static final String KEY_CHECK = "check_absence " ;
+    private static final String KEY_SECTION_ID = "sec_id" ;
 
 
     //columns name for database tables
@@ -31,12 +36,13 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //create table
-        String query = "CREATE TABLE " + DATABASE_TABLE + "(" + KEY_ID + "INT PRIMARY KEY,"+
+        String query = "CREATE TABLE " + PARENT_NOTES_TABLE + "(" + KEY_ID + "INT PRIMARY KEY AUTOINCREMENT,"+
                 KEY_STUDENT_NAME + " TEXT,"+
                 KEY_MESSAGE + " TEXT," +
-                KEY_START_DATE + " TEXT " + ")";
+                KEY_START_DATE + " TEXT" + ")";
         //For execute the query and create the table
         db.execSQL(query);
+
     }
 
     @Override
@@ -47,7 +53,8 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         if (oldVersion >= newVersion)
             return;
 
-        db.execSQL(" DROP TABLE IF EXISTS " + DATABASE_TABLE);
+        db.execSQL(" DROP TABLE IF EXISTS " + PARENT_NOTES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ABSENCE_TABLE);
         onCreate(db);
     }
 
@@ -61,7 +68,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         contentValues.put(KEY_START_DATE , parentsNotes.getStart_date());
 
 
-        long ID = sqLiteDatabase.insert(DATABASE_TABLE,null,contentValues);
+        long ID = sqLiteDatabase.insert(PARENT_NOTES_TABLE,null,contentValues);
         Log.d("inserted", "ID -> " + ID);
 
         return ID;
@@ -71,7 +78,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
     {
         //select * from databaseTable where id = 1
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE , new String[]{KEY_ID , KEY_STUDENT_NAME , KEY_MESSAGE , KEY_START_DATE }, KEY_ID +"=?" ,
+        Cursor cursor = sqLiteDatabase.query(PARENT_NOTES_TABLE , new String[]{KEY_ID , KEY_STUDENT_NAME , KEY_MESSAGE , KEY_START_DATE }, KEY_ID +"=?" ,
                 new String[]{ String.valueOf(id)},null,null,null);
 
         if (cursor !=null)
@@ -86,7 +93,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         ArrayList<ParentsNotes> allPrivateNotes =new ArrayList<>();
 
         //select * from databaseName
-        String query = "SELECT * FROM " + DATABASE_TABLE;
+        String query = "SELECT * FROM " + PARENT_NOTES_TABLE;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         if (cursor.moveToFirst())
         {
@@ -107,4 +114,20 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         cursor.close();
         return allPrivateNotes;
     }
+
+   /* public long addAbsence(AbsencesStudent absencesStudent)
+    {
+        //For write in the data base
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_SECTION_ID , absencesStudent.getSecID());
+        contentValues.put(KEY_STUDENT_NAME , absencesStudent.getName());
+        contentValues.put(KEY_CHECK , absencesStudent.isAbsence());
+
+
+        long ID = sqLiteDatabase.insert(ABSENCE_TABLE,null,contentValues);
+        Log.d("inserted", "ID -> " + ID);
+
+        return ID;
+    }*/
 }

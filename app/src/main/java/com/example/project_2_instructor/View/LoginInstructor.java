@@ -33,13 +33,10 @@ public class LoginInstructor extends AppCompatActivity {
 
     Button login_btn;
     TextInputEditText email_et,password_et;
-    TextView forgotPassword_tv;
     SharedPreferences sharedPreferences;
     String tokenMessage;
 
-    public static final String TOKEN = "token" ;
-    public static final String NUM_NOTIFICATION = "num_notification";
-    public static final String INSTRUCTOR_DB = "InstructorData";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +52,10 @@ public class LoginInstructor extends AppCompatActivity {
         login_btn=findViewById(R.id.Login_btn);
         email_et=findViewById(R.id.login_ll_1_et_email);
         password_et=findViewById(R.id.login_ll_1_et_2_password);
-        forgotPassword_tv=findViewById(R.id.login_ll_1_tv_forgot_password);
-        sharedPreferences = getSharedPreferences(INSTRUCTOR_DB,MODE_PRIVATE);
-        if(sharedPreferences.getString(NUM_NOTIFICATION,"").isEmpty()){
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
+        if(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").isEmpty()){
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(NUM_NOTIFICATION,"0");
+            editor.putString(CONSTANT.NUM_NOTIFICATION,"0");
             editor.apply();
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -123,8 +119,14 @@ public class LoginInstructor extends AppCompatActivity {
 
                 if(response.isSuccessful())
                 {
-                    saveIntoSharedPreferences(response.body());
-                   MainInstructor.redirectActivity(LoginInstructor.this, MainInstructor.class);
+                    if (response.body().isRole()) {
+                        saveIntoSharedPreferences(response.body());
+                        CONSTANT.redirectActivity(LoginInstructor.this, SectionsPage.class);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "You have to be instructor", Toast.LENGTH_SHORT).show();
+                        email_et.getText().clear();
+                        password_et.getText().clear();
+                    }
                 }
                 else {
                     try {
@@ -139,7 +141,7 @@ public class LoginInstructor extends AppCompatActivity {
             @Override
             public void onFailure(Call<Instructors> call, Throwable t) {
 
-                System.out.println("error "+ t.getMessage());
+                Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -157,6 +159,7 @@ public class LoginInstructor extends AppCompatActivity {
         editor.putString("Password",instructors.getPassword());
         editor.putString("token",instructors.getToken());
         editor.putString("tokenMessage",instructors.getTokenMessage());
+        editor.putInt(CONSTANT.KNOWLEDGE , 0) ;
         editor.apply();
 
 

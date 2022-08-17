@@ -1,7 +1,7 @@
 package com.example.project_2_instructor.Controller;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project_2_instructor.Models.Section;
 import com.example.project_2_instructor.R;
 import com.example.project_2_instructor.View.Choice_students;
-import com.example.project_2_instructor.View.MainInstructor;
-import com.example.project_2_instructor.View.SectionsPage;
 
 import java.util.ArrayList;
 
@@ -33,9 +31,8 @@ Activity activity;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_show_sections.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter_show_sections.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
          holder.num_section.setText(""+sections.get(position).getName_sec());
-         holder.num_students.setText(""+10); // Changed
         holder.cardSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,12 +58,11 @@ Activity activity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView num_students;
+
         TextView num_section;
         CardView cardSection;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            num_students = itemView.findViewById(R.id.count_student_section);
             num_section = itemView.findViewById(R.id.num_section);
             cardSection = itemView.findViewById(R.id.card_sections);
         }

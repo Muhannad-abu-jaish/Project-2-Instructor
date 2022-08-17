@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.R;
 
 public class Choice_students extends AppCompatActivity {
@@ -59,10 +60,10 @@ public class Choice_students extends AppCompatActivity {
         bundle = getIntent().getExtras();
         drawerLayout = findViewById(R.id.choice_drawer_layout);
         num_notification = findViewById(R.id.num_notification);
-        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB, MODE_PRIVATE);
-        if(!sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,"").equals("0")){
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB, MODE_PRIVATE);
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
             num_notification.setVisibility(View.VISIBLE);
-            num_notification.setText(sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,""));
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
         }
     }
     public void ClickMenu(View view)
@@ -102,7 +103,7 @@ public class Choice_students extends AppCompatActivity {
     {
         //Recreate activity
         finish();
-        MainInstructor.redirectActivity(this,MainInstructor.class);
+        CONSTANT.redirectActivity(this,SectionsPage.class);
 
     }//End of ClickHome
 
@@ -111,29 +112,17 @@ public class Choice_students extends AppCompatActivity {
     {
         //Redirect activity to personal profile
         finish();
-        MainInstructor.redirectActivity(this,Personal_profile.class);
+        CONSTANT.redirectActivity(this,Personal_profile.class);
 
     }//End of ClickPersonalProfile
 
 
 
-    // يفترض أضيف ال settings
-
-
-    public void ClickAboutUs(View view)
-    {
-
-        //Redirect activity to about us
-        //finish();
-        // redirectActivity(this , AboutUs.class );
-
-    }//End of ClickِAboutUs
-
     public void ClickLogOut(View view)
     {
         System.out.println(" am in about from Main parent");
         //Close app
-        MainInstructor.logout(this);
+        CONSTANT.logout(this);
 
     }//End of ClickِAboutUs
 

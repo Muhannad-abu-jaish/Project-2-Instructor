@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.AdapterParentsNote;
@@ -101,10 +102,10 @@ public class ParentsNote extends AppCompatActivity {
         recyclerView = findViewById(R.id.parents_note_rv_notes);
         drawerLayout = findViewById(R.id.parents_note_drawer_layout);
         adapterParentsNote = new AdapterParentsNote(this , parentsNotes);
-        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB,MODE_PRIVATE);
-        myToken = sharedPreferences.getString(LoginInstructor.TOKEN,"");
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
+        myToken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(LoginInstructor.NUM_NOTIFICATION,"0");
+        editor.putString(CONSTANT.NUM_NOTIFICATION,"0");
         editor.apply();
         setAdapterParentsNote(adapterParentsNote); ;
     }
@@ -128,20 +129,20 @@ public class ParentsNote extends AppCompatActivity {
     public void ClickMenu(View view)
     {
         //Open drawer
-        MainInstructor.openDrawer(drawerLayout);
+        CONSTANT.openDrawer(drawerLayout);
     }//End of ClickMenu
 
 
     public void ClickLogo(View view)
     {
         //Close drawer
-        MainInstructor.closeDrawer(drawerLayout);
+        CONSTANT.closeDrawer(drawerLayout);
     }//end of ClickLogo
 
     public void ClickHome(View view)
     {
         //Redirect activity to home
-        MainInstructor.redirectActivity(this , MainInstructor.class);
+        CONSTANT.redirectActivity(this , SectionsPage.class);
     }//End of ClickHome
 
 
@@ -154,13 +155,13 @@ public class ParentsNote extends AppCompatActivity {
     public void ClickPersonalProfile(View view)
     {
         //Redirect activity to dashboard
-        MainInstructor.redirectActivity(this , Personal_profile.class);
+        CONSTANT.redirectActivity(this , Personal_profile.class);
     }//End of ClickDashboard
 
     public void ClickLogOut(View view)
     {
         //Close app
-        MainInstructor.logout(this);
+        CONSTANT.logout(this);
     }//End of ClickLogout
 
 
@@ -168,6 +169,6 @@ public class ParentsNote extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //Close drawer
-        MainInstructor.closeDrawer(drawerLayout);
+        CONSTANT.closeDrawer(drawerLayout);
     }
 }

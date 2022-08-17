@@ -16,7 +16,8 @@
         <activity
             android:name=".View.ParentsNote"
             android:exported="false" />
-        <service android:name=".Controller.NotificationService">
+        <service android:name=".Controller.NotificationService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -33,9 +34,6 @@
             android:exported="false" />
         <activity
             android:name=".View.SectionsPage"
-            android:exported="false" />
-        <activity
-            android:name=".View.MainInstructor"
             android:exported="false" />
         <activity
             android:name=".View.LoginInstructor"

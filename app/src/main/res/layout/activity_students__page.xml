@@ -11,19 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/toolbar_add_private_note" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="35sp"
-            android:text="الطّلاب  "
-            android:gravity="center"
-            android:textColor="@color/Blue"/>
         <include layout="@layout/view_no_connection"
             android:id="@+id/view_NoConnection"
             android:visibility="gone"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_background1111"
             android:id="@+id/recycler_students"/>
     </LinearLayout>
     <RelativeLayout

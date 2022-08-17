@@ -96,7 +96,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/main_nav_drawer_ll_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
 
         >
 
-        <!-- android:onClick="ClickSettings"-->
+        &lt;!&ndash; android:onClick="ClickSettings"&ndash;&gt;
 
         <TextView
             android:id="@+id/main_nav_drawer_ll_settings_tv"
@@ -122,45 +122,14 @@
             android:layout_height="32dp"
             android:layout_marginEnd="48dp"
             android:src="@drawable/settings"/>
-        <!--  app:tint="@color/DarkMagenta"-->
+        &lt;!&ndash;  app:tint="@color/DarkMagenta"&ndash;&gt;
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
-    <LinearLayout
-        android:id="@+id/main_nav_drawer_ll_honorary_board"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
 
-        >
-
-        <!-- android:onClick="ClickHonoraryBoard"-->
-
-        <TextView
-            android:id="@+id/main_nav_drawer_ll_honorary_board_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/HONORARY_BOARD"
-            android:padding="12dp"
-            android:layout_marginStart="16dp"/>
-
-        <ImageView
-            android:id="@+id/main_nav_drawer_ll_honorary_board_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="48dp"
-            android:src="@drawable/star"/>
-
-        <!--  app:tint="@color/DarkMagenta"-->
-
-    </LinearLayout>
-
-
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/main_nav_drawer_ll_about_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,9 +155,9 @@
             android:src="@drawable/about_us"/>
 
 
-        <!--  app:tint="@color/DarkMagenta"-->
+        &lt;!&ndash;  app:tint="@color/DarkMagenta"&ndash;&gt;
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
     <LinearLayout

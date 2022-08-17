@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Project-2-Instructor</string>
+
+
+
+    <string name="SchoolName">مدرسة السعادة الخاصة</string>
+
+    //Login Activity
+    <string name="LOGIN">تسجيل دخول</string>
+    <string name="USERNAME">اسم المستخدم</string>
+    <string name="PASSWORD">كلمة المرور</string>
+
+
+    //Menu
+    <string name="HOME_TEXT">الصفحة الرئيسية</string>
+    <string name="PERSONAL_PROFILE">الملف الشخصي</string>
+    <string name="About_Us">عن المدرسة</string>
+    <string name="SETTINGS">الضبط</string>
+    <string name="LOGOUT">تسجيل الخروج</string>
+
+
+    //Received Message From Parents
+    <string name="RECEIVED_MESSAGE">تاريخ الاستقبال </string>
+    <string name="THE_PARENTS_MESSAGES">رسائل الأهل</string>
+    <string name="title_activity_absence_students">غيابات الطلاب</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="STUDENTS">الطلاب</string>
+    <string name="SECTIONS">الشعب المتوفرة</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

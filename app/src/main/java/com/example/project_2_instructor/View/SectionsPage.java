@@ -47,6 +47,7 @@ DrawerLayout drawerLayout;
     String d ;
     Button send;
     String exp_date , Title , message , type;
+    TextView name_tool_bar , num_notification ;
     View noConnection;
     Button Retry;
 
@@ -210,13 +211,24 @@ ArrayList<Integer> sections = new ArrayList<>();
     }
 
     private void init(){
+
+        name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv);
+        name_tool_bar.setText(R.string.SECTIONS);
         Retry = findViewById(R.id.retry_connection);
         noConnection = findViewById(R.id.view_NoConnection);
         recyclerView = findViewById(R.id.recycler_sections);
         adapter_show_sections = new Adapter_show_sections();
-        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB,MODE_PRIVATE);
-        mytoken = sharedPreferences.getString(LoginInstructor.TOKEN,"");
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
+        mytoken = sharedPreferences.getString("token","");
         drawerLayout = findViewById(R.id.section_drawer);
+
+
+        //add to Attendance_Students
+        num_notification = findViewById(R.id.tool_bar_add_private_note_menu_num_notification_tv) ;
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }
 }
 public  void Click_Add_notes(View view){
         Add_notes();
@@ -258,7 +270,7 @@ public  void Click_Add_notes(View view){
     {
         //Recreate activity
         finish();
-        MainInstructor.redirectActivity(this,MainInstructor.class);
+        CONSTANT.redirectActivity(this,SectionsPage.class);
 
     }//End of ClickHome
 
@@ -267,7 +279,7 @@ public  void Click_Add_notes(View view){
     {
         //Redirect activity to personal profile
         finish();
-        MainInstructor.redirectActivity(this,Personal_profile.class);
+        CONSTANT.redirectActivity(this,Personal_profile.class);
 
     }//End of ClickPersonalProfile
 
@@ -276,21 +288,21 @@ public  void Click_Add_notes(View view){
     // يفترض أضيف ال settings
 
 
-    public void ClickAboutUs(View view)
-    {
 
-        //Redirect activity to about us
-        //finish();
-        // redirectActivity(this , AboutUs.class );
-
-    }//End of ClickِAboutUs
 
     public void ClickLogOut(View view)
     {
         System.out.println(" am in about from Main parent");
         //Close app
-        MainInstructor.logout(this);
+        CONSTANT.logout(this);
 
     }//End of ClickِAboutUs
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //Close drawer
+        closeDrawer(drawerLayout);
+    }
 }

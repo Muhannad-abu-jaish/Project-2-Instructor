@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/absence_drawer"
     tools:context=".View.Attendance_Students">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/toolbar_add_private_note" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:text="تفقد الطّلاب "
+            android:gravity="center"
+            android:textColor="@color/Blue"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/absence_recycler_students"/>
+
+        <Button
+            android:id="@+id/attendance_students_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:layout_gravity="center"
+
+            />
+
+        <Button
+            android:id="@+id/attendance_students_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sand"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/student_drawer_layout_rl"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/White"
+
+        >
+
+        <include layout="@layout/main_nav_drawer" />
+
+
+    </RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

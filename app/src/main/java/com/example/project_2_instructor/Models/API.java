@@ -1,6 +1,7 @@
 package com.example.project_2_instructor.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,6 +30,8 @@ public interface API {
     public Call<ArrayList<Student>> seeAllStudents(@Path("sectionID") int sec_id);
     @GET("/instructor/getComplaint")
     public Call<ArrayList<ParentsNotes>> getComplaints(@Header("Authorization") String token) ;
+    @POST("/instructor/check_attendance")
+    public Call<ResponseBody> sendAttendance(@Body List<AbsencesStudent> students_array) ;
     @POST("/instructor/add-note/{studentID}")
     public Call<ResponseBody> sendNoteToStudent(@Path("studentID") int student_id , @Body Note note);
     @POST("/instructor/add_class_note")

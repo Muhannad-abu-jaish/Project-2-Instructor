@@ -6,10 +6,8 @@
 
     //Login Activity
     <string name="LOGIN">LOGIN</string>
-    <string name="SignIn">SIGN UP</string>
     <string name="USERNAME">UserName</string>
     <string name="PASSWORD">Password</string>
-    <string name="FORGOT_PASSWORD">Forgot Password</string>
 
     //Menu
     <string name="HOME_TEXT">Home</string>
@@ -17,10 +15,20 @@
     <string name="About_Us">About Us</string>
     <string name="SETTINGS">Settings</string>
     <string name="LOGOUT">Logout</string>
-    <string name="HONORARY_BOARD">Honorary Board</string>
 
     //Received Message From Parents
     <string name="RECEIVED_MESSAGE">Received Message : </string>
     <string name="THE_PARENTS_MESSAGES">The parents messages</string>
+    <string name="title_activity_absence_students">AbsenceStudents</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="STUDENTS">Students</string>
+    <string name="SECTIONS">Sections</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="retry">retry</string>
 </resources>

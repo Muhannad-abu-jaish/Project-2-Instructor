@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.R;
+
+import io.grpc.internal.ConscryptLoader;
 
 public class Personal_profile extends AppCompatActivity {
 SharedPreferences sharedPreferences;
@@ -28,11 +31,12 @@ DrawerLayout drawerLayout;
     }
 
     private void getData() {
-        String NAME = sharedPreferences.getString("firstName","") + sharedPreferences.getString("lastName","");
+        String NAME = sharedPreferences.getString(CONSTANT.firstname_instructor,"") + sharedPreferences.getString(CONSTANT.lastname_instructor,"");
         name_instructor.setText(NAME);
-        name_class_instructor.setText(sharedPreferences.getInt("name_class",0));
-        password_instructor.setText(sharedPreferences.getString("Password",""));
-        username_instructor.setText(sharedPreferences.getString("username",""));
+        name_class_instructor.setText(sharedPreferences.getInt(CONSTANT.NAME_CLASS,0));
+        password_instructor.setText(sharedPreferences.getString(CONSTANT.PASSWORD_INSTRUCTOR,""));
+
+        username_instructor.setText(sharedPreferences.getString(CONSTANT.USERNAME_INSTRUCTOR,""));
     }
 
     private void init(){
@@ -42,10 +46,10 @@ DrawerLayout drawerLayout;
         username_instructor = findViewById(R.id.username_instructor);
         drawerLayout = findViewById(R.id.personal_profile_drawer_layout);
         num_notification = findViewById(R.id.num_notification);
-        sharedPreferences = getSharedPreferences(LoginInstructor.INSTRUCTOR_DB, MODE_PRIVATE);
-        if(!sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,"").equals("0")){
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB, MODE_PRIVATE);
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
             num_notification.setVisibility(View.VISIBLE);
-            num_notification.setText(""+sharedPreferences.getString(LoginInstructor.NUM_NOTIFICATION,""));
+            num_notification.setText(""+sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
         }
     }
     public void ClickMenu(View view)
@@ -86,7 +90,7 @@ DrawerLayout drawerLayout;
     {
         //Recreate activity
         finish();
-        MainInstructor.redirectActivity(this,MainInstructor.class);
+        CONSTANT.redirectActivity(this,SectionsPage.class);
 
     }//End of ClickHome
 
@@ -101,23 +105,13 @@ DrawerLayout drawerLayout;
 
 
 
-    // يفترض أضيف ال settings
 
-
-    public void ClickAboutUs(View view)
-    {
-
-        //Redirect activity to about us
-         //finish();
-        // redirectActivity(this , AboutUs.class );
-
-    }//End of ClickِAboutUs
 
     public void ClickLogOut(View view)
     {
         System.out.println(" am in about from Main parent");
         //Close app
-        MainInstructor.logout(this);
+        CONSTANT.logout(this);
 
     }//End of ClickِAboutUs
 
