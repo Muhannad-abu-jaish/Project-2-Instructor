@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Models.Section;
 import com.example.project_2_instructor.R;
 import com.example.project_2_instructor.View.Choice_students;
@@ -39,7 +40,7 @@ Activity activity;
                 /*MainInstructor.redirectActivity(activity,Choice_students.class);*/
                 Intent intent = new Intent(holder.itemView.getContext(),Choice_students.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("SectionID",sections.get(position).getId());
+                bundle.putInt(CONSTANT.SECID,sections.get(position).getId());
                 intent.putExtras(bundle);
                 holder.itemView.getContext().startActivity(intent);
             }

@@ -8,7 +8,7 @@ public class Instructors {
     private String last_name;
     private String username;
     private String password;
-    private boolean role;
+    private int role;
     private String token;
     private String tokenMessage;
     public int getId() {
@@ -19,7 +19,7 @@ public class Instructors {
         return tokenMessage;
     }
 
-    public Instructors(int id, int name_class, String first_name, String last_name, String username, String password, boolean role, String token, String tokenMessage) {
+    public Instructors(int id, int name_class, String first_name, String last_name, String username, String password, int role, String token, String tokenMessage) {
         this.id = id;
         this.name_class = name_class;
         this.first_name = first_name;
@@ -47,10 +47,9 @@ public class Instructors {
         return password;
     }
 
-    public boolean isRole() {
+    public int getRole() {
         return role;
     }
-
 
     public int getName_class() {
         return name_class;

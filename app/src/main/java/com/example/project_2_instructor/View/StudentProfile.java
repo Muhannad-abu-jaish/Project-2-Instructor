@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,8 @@ Bundle bundle;
 int id_student;
 Toolbar toolbar;
 Button  add_note_private , add_absence_warning;
+String mytoken;
+SharedPreferences sharedPreferences;
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ Button  add_note_private , add_absence_warning;
                     else{
 
                         API api = CONSTANT.CREATING_CALL();
-                        Call<ResponseBody> responseBodyCall = api.sendAbsenceWarning(id_student,new Absence_Data(textInputEditText.getText().toString()));
+                        Call<ResponseBody> responseBodyCall = api.sendAbsenceWarning(mytoken,id_student,new Absence_Data(textInputEditText.getText().toString()));
                         responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -119,9 +122,8 @@ Button  add_note_private , add_absence_warning;
                    }
                    else{
                        API api = CONSTANT.CREATING_CALL();
-                       System.out.println("TextInput : "  +textInputEditText.getText().toString());
                        Note note = new Note(textInputEditText.getText().toString());
-                       Call<ResponseBody> responseBodyCall = api.sendNoteToStudent(id_student,note);
+                       Call<ResponseBody> responseBodyCall = api.sendNoteToStudent(mytoken,id_student,note);
                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
                            @Override
                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -133,16 +135,17 @@ Button  add_note_private , add_absence_warning;
                                    alertDialog.cancel();
                                }else{
                                    try {
+                                       Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                                        System.out.println("Error successfully : " + response.errorBody().string());
                                    } catch (IOException e) {
                                        e.printStackTrace();
                                    }
                                }
                            }
-
                            @Override
                            public void onFailure(Call<ResponseBody> call, Throwable t) {
                                System.out.println("error is : " + t.getMessage());
+                               Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
                            }
                        });
 
@@ -171,6 +174,8 @@ Button  add_note_private , add_absence_warning;
     }
 
     private void init(){
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
+        mytoken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         rankStudent = findViewById(R.id.rank_student_profile);
         username_student = findViewById(R.id.username_student_profile);
         name_class = findViewById(R.id.name_class_student_profile);

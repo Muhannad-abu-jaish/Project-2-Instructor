@@ -119,7 +119,8 @@ public class LoginInstructor extends AppCompatActivity {
 
                 if(response.isSuccessful())
                 {
-                    if (response.body().isRole()) {
+                    System.out.println("Role="+response.body().getRole());
+                    if (response.body().getRole()==1) {
                         saveIntoSharedPreferences(response.body());
                         CONSTANT.redirectActivity(LoginInstructor.this, SectionsPage.class);
                     }else {
@@ -140,7 +141,7 @@ public class LoginInstructor extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Instructors> call, Throwable t) {
-
+                System.out.println("Error : " + t.getMessage());
                 Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
 
 

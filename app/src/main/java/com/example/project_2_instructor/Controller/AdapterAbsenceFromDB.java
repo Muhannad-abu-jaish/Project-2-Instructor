@@ -20,7 +20,7 @@ import java.util.List;
 public class AdapterAbsenceFromDB extends RecyclerView.Adapter<AdapterAbsenceFromDB.AbsenceFromDBHolder> {
 
     ArrayList<Student> students = new ArrayList<>() ;
-    List<AbsencesStudent> absencesStudents = new ArrayList<>() ;
+    ArrayList<AbsencesStudent> absencesStudents = new ArrayList<>() ;
 
     public ArrayList<Student> getStudents() {
         return students;
@@ -78,7 +78,7 @@ public class AdapterAbsenceFromDB extends RecyclerView.Adapter<AdapterAbsenceFro
         return students.size();
     }
 
-    public List<AbsencesStudent> getAbsencesStudents()
+    public ArrayList<AbsencesStudent> getAbsencesStudents()
     {
         return absencesStudents ;
     }

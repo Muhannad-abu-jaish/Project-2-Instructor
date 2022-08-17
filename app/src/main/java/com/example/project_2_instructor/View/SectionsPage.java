@@ -145,9 +145,9 @@ DrawerLayout drawerLayout;
 //                    for(int i = 0 ;i <sections.size();i++){
 //                        sec[i] = sections.get(i);
 //                    }
-                    NotesClass notesClass = new NotesClass(sections,Title,exp_date,message);
+                    NotesClass notesClass = new NotesClass(Title,exp_date,message);
                     API api = CONSTANT.CREATING_CALL();
-                    Call<ResponseBody> responseBodyCall = api.sendNoteToClass(notesClass);
+                    Call<ResponseBody> responseBodyCall = api.sendNoteToClass(mytoken,notesClass);
                     responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -155,11 +155,17 @@ DrawerLayout drawerLayout;
                                 Toast.makeText(SectionsPage.this,"The Adverts is sent ",Toast.LENGTH_LONG).show();
                                 alertDialog.cancel();
                             }else{
-                                System.out.println("Success Body : " + response.errorBody().toString());
+                                try {
+                                    Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                                    System.out.println("Success Body : " + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
                             System.out.println("error : " + t.getMessage());
                         }
                     });
@@ -178,7 +184,7 @@ ArrayList<Integer> sections = new ArrayList<>();
                       noConnection.setVisibility(View.VISIBLE);
                     }else{
                         adapter_show_sections.setSections(SectionsPage.this, response.body());
-                        addToSections(response.body());
+                        //addToSections(response.body());
                         setAdapter();
                     }
                 }else{
@@ -199,11 +205,11 @@ ArrayList<Integer> sections = new ArrayList<>();
 
 }
 
-    private void addToSections(ArrayList<Section> body) {
+   /* private void addToSections(ArrayList<Section> body) {
     for(int i = 0 ;i < body.size();i++){
        sections.add(body.get(i).getId());
     }
-    }
+    }*/
 
     private void setAdapter() {
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
@@ -219,7 +225,7 @@ ArrayList<Integer> sections = new ArrayList<>();
         recyclerView = findViewById(R.id.recycler_sections);
         adapter_show_sections = new Adapter_show_sections();
         sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
-        mytoken = sharedPreferences.getString("token","");
+        mytoken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         drawerLayout = findViewById(R.id.section_drawer);
 
 

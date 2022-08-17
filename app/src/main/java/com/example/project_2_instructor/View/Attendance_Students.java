@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.Controller.AdapterAbsenceFromDB;
 import com.example.project_2_instructor.Models.API;
+import com.example.project_2_instructor.Models.Absence;
 import com.example.project_2_instructor.Models.ListAbsence;
 import com.example.project_2_instructor.Models.Student;
 import com.example.project_2_instructor.R;
@@ -35,7 +36,6 @@ public class Attendance_Students extends AppCompatActivity {
     Button sendDB ;
     int secId ;
     RecyclerView recyclerView ;
-    ListAbsence listAbsence;
     AdapterAbsenceFromDB adapterAbsenceFromDB ;
     SharedPreferences sharedPreferences;
     DrawerLayout drawerLayout;
@@ -46,6 +46,7 @@ public class Attendance_Students extends AppCompatActivity {
     View noConnection;
     Button Retry;
     Bundle bundle ;
+    String mytoken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +91,8 @@ public class Attendance_Students extends AppCompatActivity {
     private void sendAttendanceStatus()
     {
         API api = CONSTANT.CREATING_CALL();
-
-        Call<ResponseBody> call = api.sendAttendance(adapterAbsenceFromDB.getAbsencesStudents()) ;
+        Absence absence = new Absence(adapterAbsenceFromDB.getAbsencesStudents());
+        Call<ResponseBody> call = api.sendAttendance(mytoken,absence) ;
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -120,7 +121,7 @@ public class Attendance_Students extends AppCompatActivity {
     private void getStudents ()
     {
         API api = CONSTANT.CREATING_CALL();
-        Call<ArrayList<Student>> arrayListCall = api.seeAllStudents(secId);
+        Call<ArrayList<Student>> arrayListCall = api.seeAllStudents(mytoken,secId);
         arrayListCall.enqueue(new Callback<ArrayList<Student>>() {
             @Override
             public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
@@ -160,15 +161,12 @@ public class Attendance_Students extends AppCompatActivity {
 
         Retry = findViewById(R.id.retry_connection);
         noConnection = findViewById(R.id.view_NoConnection);
-
-        listAbsence = new ListAbsence() ;
         students = new ArrayList<>() ;
         bundle = getIntent().getExtras() ;
         secId = bundle.getInt(CONSTANT.SECID) ;
-
         sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB , MODE_PRIVATE) ;
         knowledge = sharedPreferences.getInt(CONSTANT.KNOWLEDGE , 0 ) ;
-
+        mytoken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         sendDB = findViewById(R.id.attendance_students_send) ;
         name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv) ;
         name_tool_bar.setText(R.string.STUDENTS);

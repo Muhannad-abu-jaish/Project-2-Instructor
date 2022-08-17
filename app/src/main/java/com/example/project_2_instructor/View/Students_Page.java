@@ -40,7 +40,9 @@ public class Students_Page extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter_show_students adapter_show_students;
     int Sec_Id ;
+    String mytoken ;
     Bundle bundle;
+    SharedPreferences sharedPreferences;
     DrawerLayout drawerLayout;
     TextView name_tool_bar ;
     EditText title , messages ;
@@ -70,7 +72,7 @@ public class Students_Page extends AppCompatActivity {
     }
     private void getStudents() {
         API api = CONSTANT.CREATING_CALL();
-        Call<ArrayList<Student>> arrayListCall = api.seeAllStudents(Sec_Id);
+        Call<ArrayList<Student>> arrayListCall = api.seeAllStudents(mytoken,Sec_Id);
         arrayListCall.enqueue(new Callback<ArrayList<Student>>() {
             @Override
             public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
@@ -180,7 +182,7 @@ public class Students_Page extends AppCompatActivity {
                     message = messages.getText().toString();
                     NoteSection noteSection = new NoteSection(Title,exp_date,message);
                     API api = CONSTANT.CREATING_CALL();
-                    Call<ResponseBody> responseBodyCall = api.sendNoteToSection(Sec_Id,noteSection);
+                    Call<ResponseBody> responseBodyCall = api.sendNoteToSection(mytoken,Sec_Id,noteSection);
                     responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -188,11 +190,17 @@ public class Students_Page extends AppCompatActivity {
                                 Toast.makeText(Students_Page.this,"Success Sending ",Toast.LENGTH_LONG).show();
                                 alertDialog.cancel();
                             }else{
-                                System.out.println("Success Body : " + response.errorBody().toString());
+                                try {
+                                    Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                                    System.out.println("Success Body : " + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
                             System.out.println("Error : " + t.getMessage());
                         }
                     });
@@ -205,11 +213,12 @@ public class Students_Page extends AppCompatActivity {
         name_tool_bar.setText(R.string.STUDENTS);
         Retry = findViewById(R.id.retry_connection);
         noConnection = findViewById(R.id.view_NoConnection);
-
+        sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
+        mytoken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         recyclerView = findViewById(R.id.recycler_students);
         adapter_show_students = new Adapter_show_students();
         bundle = getIntent().getExtras();
-        Sec_Id = bundle.getInt("SectionID");
+        Sec_Id = bundle.getInt(CONSTANT.SECID);
         drawerLayout = findViewById(R.id.student_drawer);
     }
 
