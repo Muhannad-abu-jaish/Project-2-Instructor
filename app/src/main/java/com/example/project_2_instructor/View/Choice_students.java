@@ -38,11 +38,21 @@ public class Choice_students extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Choice_students.this,Attendance_Students.class);
                 intent.putExtras(bundle);
+                finish();
                 startActivity(intent);
             }
         });
         }
-
+    @Override
+    protected void onStart() {
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
+        }
+        super.onStart();
+    }
   private void ShowStudents() {
 
       attendanceStudents.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +60,7 @@ public class Choice_students extends AppCompatActivity {
            public void onClick(View view) {
                Intent intent = new Intent(Choice_students.this,Students_Page.class);
                intent.putExtras(bundle);
+               finish();
                startActivity(intent);
            }
        });
@@ -127,10 +138,11 @@ public class Choice_students extends AppCompatActivity {
 
     public void ClickLogOut(View view)
     {
-        System.out.println(" am in about from Main parent");
         //Close app
         CONSTANT.logout(this);
-
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
     }//End of ClickِAboutUs
+
 
 }

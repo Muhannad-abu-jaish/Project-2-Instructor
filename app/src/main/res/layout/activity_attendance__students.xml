@@ -38,6 +38,14 @@
            android:background="@drawable/profile_back_button"
             android:layout_gravity="center_horizontal"
             />
+        <ProgressBar
+            android:id="@+id/progress_send_attendance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progress="10"
+            android:indeterminateTint="@color/DarkMagenta"
+            android:layout_gravity="center"/>
+
 
     </LinearLayout>
     </ScrollView>

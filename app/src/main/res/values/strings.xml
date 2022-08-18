@@ -6,8 +6,8 @@
 
     //Login Activity
     <string name="LOGIN">LOGIN</string>
-    <string name="USERNAME">UserName</string>
-    <string name="PASSWORD">Password</string>
+    <string name="USERNAME">UserName </string>
+    <string name="PASSWORD">Password </string>
 
     //Menu
     <string name="HOME_TEXT">Home</string>
@@ -51,4 +51,6 @@
     <string name="ENTER_NOTE">Enter Note</string>
     <string name="RECEIVED_DATE">Received Date : </string>
     <string name="EXPIRED_DATE">Expired Date</string>
+    <string name="password">Password</string>
+    <string name="username">UserName</string>
 </resources>

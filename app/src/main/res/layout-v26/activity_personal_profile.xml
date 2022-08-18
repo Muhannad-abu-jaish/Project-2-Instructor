@@ -148,7 +148,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/USERNAME"
+                            android:text="@string/username"
                             android:layout_gravity="start"
                             android:textSize="25sp"
                             android:textColor="@color/DarkMagenta"
@@ -178,7 +178,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/PASSWORD"
+                            android:text="@string/password"
                             android:layout_gravity="start"
                             android:textSize="25sp"
                             android:textColor="@color/DarkMagenta"

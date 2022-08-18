@@ -7,8 +7,6 @@
     android:backgroundTint="@color/Lgary"
     android:layout_height="match_parent"
     tools:context=".View.ParentsNote">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,6 +16,13 @@
         <include layout="@layout/view_no_connection"
             android:id="@+id/parent_notes_view_NoConnection"
             android:visibility="gone"/>
+        <ProgressBar
+            android:id="@+id/progress_parent_messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progress="10"
+            android:indeterminateTint="@color/DarkMagenta"
+            android:layout_gravity="center"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

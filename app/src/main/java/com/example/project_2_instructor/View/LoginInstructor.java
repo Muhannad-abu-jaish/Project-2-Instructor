@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class LoginInstructor extends AppCompatActivity {
     TextInputEditText email_et,password_et;
     SharedPreferences sharedPreferences;
     String tokenMessage;
+    ProgressBar progressBar;
 
 
     @Override
@@ -50,6 +52,7 @@ public class LoginInstructor extends AppCompatActivity {
     public void initialize()
     {
         login_btn=findViewById(R.id.Login_btn);
+        progressBar = findViewById(R.id.progress_login);
         email_et=findViewById(R.id.login_ll_1_et_email);
         password_et=findViewById(R.id.login_ll_1_et_2_password);
         sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
@@ -82,6 +85,7 @@ public class LoginInstructor extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                if(checkInputs())
                 insertLogin();
                else
@@ -119,9 +123,10 @@ public class LoginInstructor extends AppCompatActivity {
 
                 if(response.isSuccessful())
                 {
-                    System.out.println("Role="+response.body().getRole());
-                    if (response.body().getRole()!=1) {
+                    progressBar.setVisibility(View.GONE);
+                    if (response.body().getRole()==1) {
                         saveIntoSharedPreferences(response.body());
+                        finish();
                         CONSTANT.redirectActivity(LoginInstructor.this, SectionsPage.class);
                     }else {
                         Toast.makeText(getApplicationContext(), "You have to be instructor", Toast.LENGTH_SHORT).show();
@@ -130,6 +135,7 @@ public class LoginInstructor extends AppCompatActivity {
                     }
                 }
                 else {
+                    progressBar.setVisibility(View.GONE);
                     try {
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                         System.out.println("error successfully"+response.errorBody().string()+ response.code());
@@ -141,10 +147,9 @@ public class LoginInstructor extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Instructors> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
                 Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
-
-
             }
         });
     }

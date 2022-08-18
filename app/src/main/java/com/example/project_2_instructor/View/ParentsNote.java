@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class ParentsNote extends AppCompatActivity {
     View noConnection;
     TextView name_tool_bar ;
     Button Retry;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class ParentsNote extends AppCompatActivity {
         Retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 noConnection.setVisibility(View.GONE);
                 try {
                     GET_ANNOUNCEMENT();
@@ -73,7 +76,7 @@ public class ParentsNote extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<ParentsNotes>> call, Response<ArrayList<ParentsNotes>> response) {
                 if(response.isSuccessful()){
-
+                    progressBar.setVisibility(View.GONE);
                     if(response.body().size()==0){
                      noConnection.setVisibility(View.VISIBLE);
                      parentsNotesDB.deleteTable();
@@ -83,6 +86,7 @@ public class ParentsNote extends AppCompatActivity {
                         addParentsNoteToDataBase(response);
                     }
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     try {
                         if (parentsNotesDB.getAllPrivateNotes().size()==0) {
                             Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
@@ -101,6 +105,7 @@ public class ParentsNote extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<ParentsNotes>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
 
                 if (parentsNotesDB.getAllPrivateNotes().size()==0)
@@ -114,7 +119,13 @@ public class ParentsNote extends AppCompatActivity {
             }
         });
     }
+    public void ClickNotification(View view)
+    {
+         // nothing
+    }
+
     public void init(){
+        progressBar = findViewById(R.id.progress_parent_messages);
         name_tool_bar = findViewById(R.id.main_tool_bar_tv) ;
         name_tool_bar.setText(R.string.THE_PARENTS_MESSAGES);
         Retry = findViewById(R.id.retry_connection);
@@ -158,7 +169,6 @@ public class ParentsNote extends AppCompatActivity {
         CONSTANT.openDrawer(drawerLayout);
     }//End of ClickMenu
 
-
     public void ClickLogo(View view)
     {
         //Close drawer
@@ -168,19 +178,15 @@ public class ParentsNote extends AppCompatActivity {
     public void ClickHome(View view)
     {
         //Redirect activity to home
+        finish();
         CONSTANT.redirectActivity(this , SectionsPage.class);
     }//End of ClickHome
 
 
-    public void ClickAboutUs(View view)
-    {
-        //Recreate activity
-       // MainInstructor.redirectActivity(this , MainInstructor.class);
-    }//End of ClickAboutUs
-
     public void ClickPersonalProfile(View view)
     {
         //Redirect activity to dashboard
+        finish();
         CONSTANT.redirectActivity(this , Personal_profile.class);
     }//End of ClickDashboard
 
@@ -188,13 +194,15 @@ public class ParentsNote extends AppCompatActivity {
     {
         //Close app
         CONSTANT.logout(this);
-    }//End of ClickLogout
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
+    }//End of ClickِAboutUs
 
 
     @Override
     protected void onPause() {
-        super.onPause();
-        //Close drawer
         CONSTANT.closeDrawer(drawerLayout);
+        super.onPause();
+
     }
 }

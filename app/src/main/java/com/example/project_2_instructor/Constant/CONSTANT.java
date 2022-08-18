@@ -49,7 +49,7 @@ public class CONSTANT {
 
 
     public static String URL = "http://192.168.187.12:3000/";
-    public static String URL_EMULATOR = "http://10.0.2.2:3000/";
+    public static String URL_EMULATOR = "http://192.168.187.104:3000/";
     public static API CREATING_CALL(){
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL_EMULATOR)

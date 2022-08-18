@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ DrawerLayout drawerLayout;
     TextView name_tool_bar , num_notification ;
     View noConnection;
     Button Retry;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,17 @@ DrawerLayout drawerLayout;
         init();
         getSections();
         RetryConnection();
+    }
+
+    @Override
+    protected void onStart() {
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
+        }
+        super.onStart();
     }
     private void RetryConnection() {
         Retry.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +168,7 @@ DrawerLayout drawerLayout;
                                 alertDialog.cancel();
                             }else{
                                 try {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                                     System.out.println("Success Body : " + response.errorBody().string());
                                 } catch (IOException e) {
@@ -181,6 +194,7 @@ ArrayList<Integer> sections = new ArrayList<>();
             @Override
             public void onResponse(Call<ArrayList<Section>> call, Response<ArrayList<Section>> response) {
                 if(response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     if(response.body().size()==0) {
                       noConnection.setVisibility(View.VISIBLE);
                     }else{
@@ -189,7 +203,9 @@ ArrayList<Integer> sections = new ArrayList<>();
                         setAdapter();
                     }
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     try {
+                        noConnection.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -198,6 +214,7 @@ ArrayList<Integer> sections = new ArrayList<>();
             }
             @Override
             public void onFailure(Call<ArrayList<Section>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
                 noConnection.setVisibility(View.VISIBLE);
             }
@@ -218,7 +235,7 @@ ArrayList<Integer> sections = new ArrayList<>();
     }
 
     private void init(){
-
+        progressBar = findViewById(R.id.progress_sections);
         name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv);
         name_tool_bar.setText(R.string.SECTIONS);
         Retry = findViewById(R.id.retry_connection);
@@ -237,7 +254,7 @@ ArrayList<Integer> sections = new ArrayList<>();
             num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
         }
 }
-public  void Click_Add_notes(View view){
+    public  void Click_Add_notes(View view){
         Add_notes();
 }
 
@@ -282,8 +299,7 @@ public  void Click_Add_notes(View view){
     {
         //Recreate activity
         finish();
-        CONSTANT.redirectActivity(this,SectionsPage.class);
-
+        recreate();
     }//End of ClickHome
 
 
@@ -304,10 +320,10 @@ public  void Click_Add_notes(View view){
 
     public void ClickLogOut(View view)
     {
-        System.out.println(" am in about from Main parent");
         //Close app
         CONSTANT.logout(this);
-
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
     }//End of ClickِAboutUs
 
     @Override

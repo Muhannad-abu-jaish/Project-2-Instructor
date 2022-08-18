@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class Students_Page extends AppCompatActivity {
     Bundle bundle;
     SharedPreferences sharedPreferences;
     DrawerLayout drawerLayout;
-    TextView name_tool_bar ;
+    TextView name_tool_bar , num_notification;
     EditText title , messages ;
     String y ;
     String m;
@@ -53,6 +54,7 @@ public class Students_Page extends AppCompatActivity {
     String exp_date , Title , message , type;
     View noConnection;
     Button Retry;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class Students_Page extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
                 if(response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
                     if(response.body().size()==0){
                         noConnection.setVisibility(View.VISIBLE);
                     }else {
@@ -84,7 +87,9 @@ public class Students_Page extends AppCompatActivity {
                         setAdapter();
                     }
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     try {
+                        noConnection.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -93,6 +98,7 @@ public class Students_Page extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
                 noConnection.setVisibility(View.VISIBLE);
             }
@@ -208,7 +214,7 @@ public class Students_Page extends AppCompatActivity {
             });
     }
     private void init(){
-
+        progressBar = findViewById(R.id.progress_students);
         name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv) ;
         name_tool_bar.setText(R.string.STUDENTS);
         Retry = findViewById(R.id.retry_connection);
@@ -220,6 +226,13 @@ public class Students_Page extends AppCompatActivity {
         bundle = getIntent().getExtras();
         Sec_Id = bundle.getInt(CONSTANT.SECID);
         drawerLayout = findViewById(R.id.student_drawer);
+        num_notification = findViewById(R.id.tool_bar_add_private_note_menu_num_notification_tv) ;
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
+        }
     }
 
     public void ClickMenu(View view)
@@ -264,11 +277,8 @@ public class Students_Page extends AppCompatActivity {
     {
         //Recreate activity
         finish();
-        CONSTANT.redirectActivity(this,SectionsPage.class);
-
+        CONSTANT.redirectActivity(Students_Page.this,SectionsPage.class);
     }//End of ClickHome
-
-
     public void ClickPersonalProfile(View view)//PersonalProfile
     {
         //Redirect activity to personal profile
@@ -280,10 +290,10 @@ public class Students_Page extends AppCompatActivity {
 
     public void ClickLogOut(View view)
     {
-        System.out.println(" am in about from Main parent");
         //Close app
         CONSTANT.logout(this);
-
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
     }//End of ClickِAboutUs
 
 }

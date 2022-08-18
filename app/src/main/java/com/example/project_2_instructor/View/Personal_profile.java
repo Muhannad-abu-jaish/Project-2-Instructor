@@ -31,14 +31,12 @@ DrawerLayout drawerLayout;
     }
 
     private void getData() {
-        String NAME = sharedPreferences.getString(CONSTANT.firstname_instructor,"") + sharedPreferences.getString(CONSTANT.lastname_instructor,"");
+        String NAME = sharedPreferences.getString(CONSTANT.firstname_instructor,"") +" "+ sharedPreferences.getString(CONSTANT.lastname_instructor,"");
         name_instructor.setText(NAME);
-        name_class_instructor.setText(sharedPreferences.getInt(CONSTANT.NAME_CLASS,0));
+        name_class_instructor.setText(""+sharedPreferences.getInt(CONSTANT.NAME_CLASS,0));
         password_instructor.setText(sharedPreferences.getString(CONSTANT.PASSWORD_INSTRUCTOR,""));
-
         username_instructor.setText(sharedPreferences.getString(CONSTANT.USERNAME_INSTRUCTOR,""));
     }
-
     private void init(){
         name_class_instructor = findViewById(R.id.name_class_instructor);
         name_instructor = findViewById(R.id.name_Instructor);
@@ -50,7 +48,19 @@ DrawerLayout drawerLayout;
         if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
             num_notification.setVisibility(View.VISIBLE);
             num_notification.setText(""+sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
         }
+    }
+    @Override
+    protected void onStart() {
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
+        }
+        super.onStart();
     }
     public void ClickMenu(View view)
     {
@@ -70,8 +80,6 @@ DrawerLayout drawerLayout;
         //Close drawer
         closeDrawer(drawerLayout);
     }//End of ClickLogo
-
-
 
     public void ClickNotification(View view)
     {
@@ -100,7 +108,6 @@ DrawerLayout drawerLayout;
 
     }//End of ClickHome
 
-
     public void ClickPersonalProfile(View view)//PersonalProfile
     {
         //Redirect activity to personal profile
@@ -109,17 +116,14 @@ DrawerLayout drawerLayout;
 
     }//End of ClickPersonalProfile
 
-
-
-
-
     public void ClickLogOut(View view)
     {
-        System.out.println(" am in about from Main parent");
         //Close app
         CONSTANT.logout(this);
-
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
     }//End of ClickِAboutUs
+
 
 
 

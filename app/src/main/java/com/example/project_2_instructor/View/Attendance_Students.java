@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,6 +63,7 @@ public class Attendance_Students extends AppCompatActivity {
     Button Retry;
     Bundle bundle ;
     String mytoken;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,7 @@ public class Attendance_Students extends AppCompatActivity {
         Retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 noConnection.setVisibility(View.GONE);
                 getStudents();
             }
@@ -92,13 +95,8 @@ public class Attendance_Students extends AppCompatActivity {
         sendDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                progressBar.setVisibility(View.VISIBLE);
                 sendAttendanceStatus();
-
-                for (int i=0 ; i<adapterAbsenceFromDB.getAbsencesStudents().size() ; i++)
-                {
-                    System.out.println("--------"+adapterAbsenceFromDB.getAbsencesStudents().get(i).getId() + "// " +adapterAbsenceFromDB.getAbsencesStudents().get(i).isAbsence()+"---------------");
-                }
             }
         });
     }
@@ -111,13 +109,14 @@ public class Attendance_Students extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                 if (response.isSuccessful())
                 {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext() , " Send is successful", Toast.LENGTH_SHORT).show();
                 }
 
                 else{
+                    progressBar.setVisibility(View.GONE);
                     try {
                         System.out.println("error successfully : " + response.errorBody().string());
                     } catch (IOException e) {
@@ -125,7 +124,6 @@ public class Attendance_Students extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext() , t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -251,6 +249,7 @@ public class Attendance_Students extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
                 if(response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
                     if (response.body().size()==0) {
                         noConnection.setVisibility(View.VISIBLE);
                     }else
@@ -259,9 +258,10 @@ public class Attendance_Students extends AppCompatActivity {
                         students = adapterAbsenceFromDB.getStudents();
                         setAdapterAbsenceFromDB();
                     }
-
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     try {
+                        noConnection.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -270,20 +270,30 @@ public class Attendance_Students extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
                 noConnection.setVisibility(View.VISIBLE);
             }
         });
     }
 
-
+    @Override
+    protected void onStart() {
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")){
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,""));
+        }else{
+            num_notification.setVisibility(View.GONE);
+        }
+        super.onStart();
+    }
     private void setAdapterAbsenceFromDB() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
         recyclerView.setAdapter(adapterAbsenceFromDB);
     }
     public void init()
     {
-
+       progressBar = findViewById(R.id.progress_send_attendance);
         Retry = findViewById(R.id.retry_connection);
         noConnection = findViewById(R.id.view_NoConnection);
         students = new ArrayList<>() ;
@@ -298,7 +308,6 @@ public class Attendance_Students extends AppCompatActivity {
         drawerLayout = findViewById(R.id.absence_drawer) ;
         recyclerView = findViewById(R.id.absence_recycler_students) ;
         adapterAbsenceFromDB = new AdapterAbsenceFromDB() ;
-
         num_notification = findViewById(R.id.tool_bar_add_private_note_menu_num_notification_tv) ;
         if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")) {
             num_notification.setVisibility(View.VISIBLE);
@@ -363,24 +372,13 @@ public class Attendance_Students extends AppCompatActivity {
 
 
 
-    // يفترض أضيف ال settings
-
-
-    public void ClickAboutUs(View view)
-    {
-
-        //Redirect activity to about us
-        //finish();
-        // redirectActivity(this , AboutUs.class );
-
-    }//End of ClickِAboutUs
-
     public void ClickLogOut(View view)
     {
-        System.out.println(" am in about from Main parent");
         //Close app
         CONSTANT.logout(this);
-
+        finish();
+        CONSTANT.redirectActivity(this,LoginInstructor.class);
     }//End of ClickِAboutUs
+
 
 }

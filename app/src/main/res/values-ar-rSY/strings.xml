@@ -8,8 +8,8 @@
 
     //Login Activity
     <string name="LOGIN">تسجيل دخول</string>
-    <string name="USERNAME">اسم المستخدم</string>
-    <string name="PASSWORD">كلمة المرور</string>
+    <string name="USERNAME">اسم المستخدم </string>
+    <string name="PASSWORD">كلمة المرور </string>
 
 
     //Menu
