@@ -15,7 +15,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.example.project_2_instructor.View.StudentProfile"
-    android:background="@color/profileBackground">
+    android:background="@color/LemonChiffon">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/profilePrimaryDark"
+            app:contentScrim="@color/DarkMagenta"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar"
             app:expandedTitleMarginEnd="64dp"
@@ -41,33 +41,30 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:id="@+id/linearLayout"
-                android:background="@drawable/profile_bk">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rank_student_profile"
-                        android:textSize="18dp"/>
-                    <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/profile_round" />
+                android:background="@color/LemonChiffon">
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/username_student_profile"
-                    android:textSize="28dp"
+                    android:textSize="28sp"
+                    android:layout_marginTop="60dp"
+                    android:textColor="@color/DarkMagenta"
                     android:textStyle="bold"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/name_class_student_profile"
-                    android:textSize="15sp"
+                    android:textColor="@color/DarkMagenta"
+                    android:textSize="22sp"
                     android:gravity="center"
                     android:textStyle="bold"/>
                     <TextView
@@ -76,8 +73,19 @@
                         android:gravity="center"
                         android:layout_height="wrap_content"
                         android:id="@+id/section_student_profile"
-                        android:textSize="15sp"
+                        android:textColor="@color/DarkMagenta"
+                        android:textSize="22sp"
                         android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:id="@+id/rank_student_profile"
+                        android:textColor="@color/DarkMagenta"
+                        android:text="Rank"
+                        android:textSize="22sp"/>
 
                 </LinearLayout>
                 <RelativeLayout
@@ -89,15 +97,12 @@
                     android:background="@color/profileBackground">
 
                     <View
-                        android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:background="@drawable/profile_bk"/>
+                        android:layout_alignParentTop="true"
+                        android:background="@color/LemonChiffon" />
 
-                    <TextView
-                        android:text="Back to\n Section"
-                        android:id="@+id/GoBack_profile"
-                        style="@style/profileStyledBackButton" />
+
                 </RelativeLayout>
 
             </LinearLayout>

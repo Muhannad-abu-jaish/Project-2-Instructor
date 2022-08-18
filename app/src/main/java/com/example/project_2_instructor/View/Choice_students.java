@@ -10,15 +10,17 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
 import com.example.project_2_instructor.R;
 
 public class Choice_students extends AppCompatActivity {
-  Button attendance, students ;
+
   Bundle bundle ;
   DrawerLayout drawerLayout;
+  LinearLayout attendanceStudents ,showStudents ;
   SharedPreferences sharedPreferences;
   TextView num_notification;
     @Override
@@ -31,7 +33,7 @@ public class Choice_students extends AppCompatActivity {
     }
 
     private void ShowAttendance() {
-        attendance.setOnClickListener(new View.OnClickListener() {
+        showStudents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Choice_students.this,Attendance_Students.class);
@@ -41,9 +43,9 @@ public class Choice_students extends AppCompatActivity {
         });
         }
 
-    private void ShowStudents() {
+  private void ShowStudents() {
 
-       students.setOnClickListener(new View.OnClickListener() {
+      attendanceStudents.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                Intent intent = new Intent(Choice_students.this,Students_Page.class);
@@ -55,8 +57,8 @@ public class Choice_students extends AppCompatActivity {
     }
 
     private void init(){
-        students = findViewById(R.id.show_students);
-        attendance = findViewById(R.id.attendance);
+        attendanceStudents = findViewById(R.id.choice_students_check_students_ll);
+        showStudents = findViewById(R.id.choice_students_show_students_ll);
         bundle = getIntent().getExtras();
         drawerLayout = findViewById(R.id.choice_drawer_layout);
         num_notification = findViewById(R.id.num_notification);
@@ -85,6 +87,11 @@ public class Choice_students extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }//End of ClickLogo
 
+
+    public void ClickNotification(View view)
+    {
+        CONSTANT.redirectActivity(this,ParentsNote.class);
+    }
     public static void closeDrawer(DrawerLayout drawerLayout)
     {
         //Close drawer layout

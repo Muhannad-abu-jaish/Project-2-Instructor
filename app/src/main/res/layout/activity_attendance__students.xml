@@ -5,23 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/absence_drawer"
+    android:backgroundTint="@color/LemonChiffon"
     tools:context=".View.Attendance_Students">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/LemonChiffon"
         android:orientation="vertical">
         <include layout="@layout/toolbar_add_private_note" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="35sp"
-            android:text="تفقد الطّلاب "
-            android:gravity="center"
-            android:textColor="@color/Blue"/>
+
         <include layout="@layout/view_no_connection"
             android:id="@+id/view_NoConnection"
             android:visibility="gone"/>
@@ -29,27 +25,23 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/LemonChiffon"
+
             android:id="@+id/absence_recycler_students"/>
 
-        <Button
-            android:id="@+id/attendance_students_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="save"
-            android:layout_gravity="center"
-
-            />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/attendance_students_send"
-            android:layout_width="wrap_content"
+            android:layout_width="177dp"
             android:layout_height="wrap_content"
-            android:text="sand"
+            android:text="@string/SEND"
+            android:textColor="@color/LemonChiffon"
+           android:background="@drawable/profile_back_button"
             android:layout_gravity="center_horizontal"
             />
 
     </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
         android:id="@+id/student_drawer_layout_rl"
         android:layout_width="300dp"

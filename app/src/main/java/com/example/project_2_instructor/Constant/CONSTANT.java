@@ -40,13 +40,15 @@ public class CONSTANT {
     public static String NAME_CLASS = "name_class";
     public static String PASSWORD_INSTRUCTOR = "Password";
     public static String USERNAME_INSTRUCTOR = "username";
+    public static String ID_INSTRUCTOR = "ins_id";
+    public static String TOKEN_MESSAGE = "tokenMessage";
 
     public static final String TOKEN = "token" ;
     public static final String NUM_NOTIFICATION = "num_notification";
     public static final String INSTRUCTOR_DB = "InstructorData";
 
 
-    public static String URL = "http://192.168.1.107:3000/";
+    public static String URL = "http://192.168.187.12:3000/";
     public static String URL_EMULATOR = "http://10.0.2.2:3000/";
     public static API CREATING_CALL(){
         Gson gson = new GsonBuilder().setLenient().create();

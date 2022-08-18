@@ -120,7 +120,7 @@ public class LoginInstructor extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     System.out.println("Role="+response.body().getRole());
-                    if (response.body().getRole()==1) {
+                    if (response.body().getRole()!=1) {
                         saveIntoSharedPreferences(response.body());
                         CONSTANT.redirectActivity(LoginInstructor.this, SectionsPage.class);
                     }else {
@@ -152,14 +152,14 @@ public class LoginInstructor extends AppCompatActivity {
     private void saveIntoSharedPreferences(Instructors instructors)
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("ins_id",instructors.getId());
-        editor.putInt("name_class",instructors.getName_class());
-        editor.putString("firstName",instructors.getFirst_name());
-        editor.putString("lastName",instructors.getLast_name());
-        editor.putString("username",instructors.getUsername());
-        editor.putString("Password",instructors.getPassword());
-        editor.putString("token",instructors.getToken());
-        editor.putString("tokenMessage",instructors.getTokenMessage());
+        editor.putInt(CONSTANT.ID_INSTRUCTOR,instructors.getId());
+        editor.putInt(CONSTANT.NAME_CLASS,instructors.getName_class());
+        editor.putString(CONSTANT.firstname_instructor,instructors.getFirst_name());
+        editor.putString(CONSTANT.lastname_instructor,instructors.getLast_name());
+        editor.putString(CONSTANT.USERNAME_INSTRUCTOR,instructors.getUsername());
+        editor.putString(CONSTANT.PASSWORD_INSTRUCTOR,instructors.getPassword());
+        editor.putString(CONSTANT.TOKEN,instructors.getToken());
+        editor.putString(CONSTANT.TOKEN_MESSAGE,instructors.getTokenMessage());
         editor.putInt(CONSTANT.KNOWLEDGE , 0) ;
         editor.apply();
 

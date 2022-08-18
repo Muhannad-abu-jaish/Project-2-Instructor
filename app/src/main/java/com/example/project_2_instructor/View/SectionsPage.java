@@ -172,6 +172,7 @@ DrawerLayout drawerLayout;
                 }
             });
 }
+
 ArrayList<Integer> sections = new ArrayList<>();
     private void getSections() {
         API api = CONSTANT.CREATING_CALL();
@@ -239,6 +240,11 @@ ArrayList<Integer> sections = new ArrayList<>();
 public  void Click_Add_notes(View view){
         Add_notes();
 }
+
+    public void ClickNotification(View view)
+    {
+        CONSTANT.redirectActivity(this,ParentsNote.class);
+    }
     public void ClickMenu(View view)
     {
         //Open Drawer

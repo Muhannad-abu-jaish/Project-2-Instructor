@@ -5,61 +5,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/LemonChiffon"
     android:orientation="vertical"
     android:id="@+id/choice_drawer_layout"
-    android:background="@drawable/login_bg"
+
     tools:context=".View.Choice_students">
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <include layout="@layout/main_toolbar" />
-<ImageView
-    android:layout_width="250sp"
-    android:layout_height="250sp"
-    android:layout_gravity="center"
-    android:src="@drawable/mainlogo"/>
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/main_toolbar" />
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="203dp"
+            android:layout_height="189dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/logo_no_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="224dp"
+            android:orientation="vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499">
+
+            <LinearLayout
+                android:id="@+id/choice_students_check_students_ll"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_the_main_choices"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:src="@drawable/students_icon" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499">
+
+            <LinearLayout
+                android:id="@+id/choice_students_show_students_ll"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_the_main_choices"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/clock" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/attendance"
-                android:background="@drawable/clock"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="أخذ التّفقّد "/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/show_students"
-                android:background="@drawable/students_icon"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="عرض الطّلاب "/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="220dp"
+            android:background="@drawable/personal_profile_top_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <RelativeLayout
         android:id="@+id/choice_drawer_layout_rl"
         android:layout_width="300dp"
@@ -72,4 +128,6 @@
         <include layout="@layout/main_nav_drawer" />
 
     </RelativeLayout>
+
+
 </androidx.drawerlayout.widget.DrawerLayout>

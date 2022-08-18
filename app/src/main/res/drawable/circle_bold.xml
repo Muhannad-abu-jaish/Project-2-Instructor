@@ -5,7 +5,7 @@
             <size
                 android:height="10dp"
                 android:width="20sp" />
-            <solid android:color="#707070"/>
+            <solid android:color="@color/DarkMagenta"/>
         </shape>
     </item>
     <item android:state_pressed="true">

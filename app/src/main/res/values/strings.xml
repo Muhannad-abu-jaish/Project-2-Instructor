@@ -31,4 +31,24 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="retry">retry</string>
+    <string name="CHECK_STUDENTS">Check Students</string>
+    <string name="SHOW_STUDENTS">Show Students</string>
+
+    <string name="SEND">Send</string>
+    <string name="ABSENCE">Absence ?</string>
+    <string name="CLASS">Class</string>
+    <string name="ACCOUNT_INFORMATION">Account Info</string>
+    <string name="FULL_NAME">Full Name</string>
+    <string name="ATTENDANCE_NUMBER">Attendance Number</string>
+    <string name="ABSENCE_NUMCER">Absence Number</string>
+    <string name="Age">Age</string>
+    <string name="Birth_Date">Birth Date</string>
+    <string name="ADD_PRIVATE_NOTE">Add Private Note</string>
+    <string name="ADD_ABSENCE_WARNING">Add Absence Warning</string>
+
+    <string name="TITLE">Title </string>
+    <string name="ENTER_TITLE">Enter Title</string>
+    <string name="ENTER_NOTE">Enter Note</string>
+    <string name="RECEIVED_DATE">Received Date : </string>
+    <string name="EXPIRED_DATE">Expired Date</string>
 </resources>

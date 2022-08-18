@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/LemonChiffon"
     android:id="@+id/main_nav_drawer"
     >
 
@@ -13,7 +14,7 @@
         android:layout_height="120dp"
         android:layout_margin="16dp"
         android:onClick="ClickLogo"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_no_bg"
         tools:ignore="UsingOnClickInXml" />
 
     <TextView
@@ -49,15 +50,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/HOME_TEXT"
+            android:layout_gravity="start"
             android:padding="12dp"
+            android:textColor="@color/DarkMagenta"
             android:layout_marginStart="16dp"/>
 
         <ImageView
             android:id="@+id/main_nav_drawer_ll_home_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="end|center"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/homepage"/>
+            android:src="@drawable/ic_home"/>
 
         <!--  app:tint="@color/DarkMagenta"-->
 
@@ -80,6 +84,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="start"
+            android:textColor="@color/DarkMagenta"
             android:text="@string/PERSONAL_PROFILE"
             android:padding="12dp"
             android:layout_marginStart="16dp"/>
@@ -88,8 +94,9 @@
             android:id="@+id/main_nav_drawer_ll_personal_profile_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="end|center"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/profile"/>
+            android:src="@drawable/ic_profile"/>
 
 
         <!--  app:tint="@color/DarkMagenta"-->
@@ -174,6 +181,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="start"
+            android:textColor="@color/DarkMagenta"
             android:text="@string/LOGOUT"
             android:padding="12dp"
             android:layout_marginStart="16dp"/>
@@ -182,8 +191,9 @@
             android:id="@+id/main_nav_drawer_ll_logout_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="end|center"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/logout"/>
+            android:src="@drawable/ic_logout"/>
 
         <!--  app:tint="@color/DarkMagenta"-->
 

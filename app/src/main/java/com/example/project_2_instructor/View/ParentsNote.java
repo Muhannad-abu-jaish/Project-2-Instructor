@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_2_instructor.Constant.CONSTANT;
@@ -36,6 +37,7 @@ public class ParentsNote extends AppCompatActivity {
     String myToken;
     SharedPreferences sharedPreferences ;
     View noConnection;
+    TextView name_tool_bar ;
     Button Retry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +73,25 @@ public class ParentsNote extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<ParentsNotes>> call, Response<ArrayList<ParentsNotes>> response) {
                 if(response.isSuccessful()){
+
                     if(response.body().size()==0){
                      noConnection.setVisibility(View.VISIBLE);
+                     parentsNotesDB.deleteTable();
                     }else {
-                        adapterParentsNote.setParentsNotes(response.body());
+                        adapterParentsNote = new AdapterParentsNote(getApplicationContext() , response.body());
                         setAdapterParentsNote(adapterParentsNote);
                         addParentsNoteToDataBase(response);
                     }
                 }else{
                     try {
+                        if (parentsNotesDB.getAllPrivateNotes().size()==0) {
+                            Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+
+                        }else
+                        {
+                            adapterParentsNote = new AdapterParentsNote(getApplicationContext(), parentsNotesDB.getAllPrivateNotes());
+                            setAdapterParentsNote(adapterParentsNote);
+                        }
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
                         System.out.println("Error Statues !" + response.code() + "\t Error Body : " + response.errorBody().string());
                     } catch (IOException e) {
@@ -90,24 +102,36 @@ public class ParentsNote extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<ParentsNotes>> call, Throwable t) {
                 System.out.println("Error : " + t.getMessage());
-                noConnection.setVisibility(View.VISIBLE);
+
+                if (parentsNotesDB.getAllPrivateNotes().size()==0)
+                  noConnection.setVisibility(View.VISIBLE);
+                else
+                {
+                    parentsNotes = parentsNotesDB.getAllPrivateNotes();
+                    adapterParentsNote = new AdapterParentsNote(getApplicationContext() , parentsNotes);
+                    setAdapterParentsNote(adapterParentsNote);
+                }
             }
         });
     }
     public void init(){
+        name_tool_bar = findViewById(R.id.main_tool_bar_tv) ;
+        name_tool_bar.setText(R.string.THE_PARENTS_MESSAGES);
         Retry = findViewById(R.id.retry_connection);
-        noConnection = findViewById(R.id.view_NoConnection);
+        noConnection = findViewById(R.id.parent_notes_view_NoConnection);
         parentsNotesDB = new ParentsNotesDB(this);
-        parentsNotes = parentsNotesDB.getAllPrivateNotes();
+        parentsNotes =new ArrayList<>() ;
+
+
+
         recyclerView = findViewById(R.id.parents_note_rv_notes);
         drawerLayout = findViewById(R.id.parents_note_drawer_layout);
-        adapterParentsNote = new AdapterParentsNote(this , parentsNotes);
+
         sharedPreferences = getSharedPreferences(CONSTANT.INSTRUCTOR_DB,MODE_PRIVATE);
         myToken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(CONSTANT.NUM_NOTIFICATION,"0");
         editor.apply();
-        setAdapterParentsNote(adapterParentsNote); ;
     }
 
 
@@ -116,6 +140,8 @@ public class ParentsNote extends AppCompatActivity {
         parentsNotes = response.body();
         for (int i = 0 ;i<parentsNotes.size() ; i++)
         {
+            boolean status = parentsNotesDB.isExists(parentsNotes.get(i).getId());
+            if (!status)
             parentsNotesDB.addParentsNote(parentsNotes.get(i)) ;
         }
 

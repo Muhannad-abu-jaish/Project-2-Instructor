@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="150dp"
     android:layout_margin="5dp"
     android:id="@+id/card_students"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="30dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="10dp"
-    android:backgroundTint="@color/Lgary"
+    android:backgroundTint="@color/DarkMagenta"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
@@ -44,10 +44,10 @@
                     android:id="@+id/name_student_section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/person_student"
                     android:gravity="start"
+                    android:layout_marginStart="20dp"
                     android:layout_gravity="start"
-                    android:textColor="@color/MediumVioletRed"
+                    android:textColor="@color/LemonChiffon"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                     android:layout_gravity="center"
                     android:text="No Rank"
                     android:paddingStart="40dp"
-                    android:textColor="@color/DarkMagenta"
+                    android:textColor="@color/LemonChiffon"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.project_2_instructor.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +24,13 @@ import com.example.project_2_instructor.Controller.AdapterAbsenceFromDB;
 import com.example.project_2_instructor.Models.API;
 import com.example.project_2_instructor.Models.Absence;
 import com.example.project_2_instructor.Models.ListAbsence;
+import com.example.project_2_instructor.Models.NotesClass;
 import com.example.project_2_instructor.Models.Student;
 import com.example.project_2_instructor.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,9 +46,17 @@ public class Attendance_Students extends AppCompatActivity {
     AdapterAbsenceFromDB adapterAbsenceFromDB ;
     SharedPreferences sharedPreferences;
     DrawerLayout drawerLayout;
-    TextView name_tool_bar ;
+    TextView name_tool_bar ,num_notification;
     CheckBox checkBox ;
     int knowledge ;
+
+    EditText title , messages ;
+    String y ;
+    String m;
+    String d ;
+    Button send;
+    String exp_date , Title , message , type;
+
     String studentName ;
     View noConnection;
     Button Retry;
@@ -118,6 +133,116 @@ public class Attendance_Students extends AppCompatActivity {
         });
     }
 
+    public void Click_Add_notes (View view)
+    {
+        Add_notes();
+    }
+
+    private void Add_notes() {
+        View view2 = getLayoutInflater().inflate(R.layout.alert_add_notes_class,null);
+        AlertDialog alertDialog = new AlertDialog.Builder(Attendance_Students.this)
+                .setView(view2)
+                .show();
+        Spinner year,month,day;
+        year = view2.findViewById(R.id.year_notes);
+        month = view2.findViewById(R.id.month_note);
+        day = view2.findViewById(R.id.day_note);
+        title = view2.findViewById(R.id.Title_note_section);
+        messages = view2.findViewById(R.id.Text_note_section);
+        send = view2.findViewById(R.id.send_note_section);
+        List<Integer> years = new ArrayList<>();
+        final List<Integer> months = new ArrayList<>();
+        List<Integer>days = new ArrayList<>();
+        for(int i = 2022;i<2051;i++){
+            years.add(i);
+        }
+        for(int i = 1 ; i<13 ; i++){
+            months.add(i);
+        }
+        for(int i = 1 ; i<31;i++){
+            days.add(i);
+        }
+        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter(Attendance_Students.this,android.R.layout.simple_list_item_1,years);
+        ArrayAdapter<Integer> monthsAdapter = new ArrayAdapter(Attendance_Students.this,android.R.layout.simple_list_item_1, months);
+        ArrayAdapter<Integer> daysAdapter = new ArrayAdapter(Attendance_Students.this,android.R.layout.simple_list_item_1,days);
+        yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        year.setAdapter(yearsAdapter);
+        monthsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        month.setAdapter(monthsAdapter);
+        daysAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        day.setAdapter(daysAdapter);
+        year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                y = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                y = adapterView.getItemAtPosition(0).toString();
+            }
+        });
+        month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                m = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                m = adapterView.getItemAtPosition(0).toString();
+            }
+        });
+        day.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                d = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                d = adapterView.getItemAtPosition(0).toString();
+            }
+        });
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type = "To Class";
+                exp_date = y + "-" + m + "-" + d;
+                Title = title.getText().toString();
+                message = messages.getText().toString();
+//                    int[] sec = new int[sections.size()+1];
+//                    for(int i = 0 ;i <sections.size();i++){
+//                        sec[i] = sections.get(i);
+//                    }
+                NotesClass notesClass = new NotesClass(Title,exp_date,message);
+                API api = CONSTANT.CREATING_CALL();
+                Call<ResponseBody> responseBodyCall = api.sendNoteToClass(mytoken,notesClass);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(Attendance_Students.this,"The Adverts is sent ",Toast.LENGTH_LONG).show();
+                            alertDialog.cancel();
+                        }else{
+                            try {
+                                Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                                System.out.println("Success Body : " + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Error connection ,,Please check your connect", Toast.LENGTH_SHORT).show();
+                        System.out.println("error : " + t.getMessage());
+                    }
+                });
+            }
+        });
+    }
+
     private void getStudents ()
     {
         API api = CONSTANT.CREATING_CALL();
@@ -169,13 +294,23 @@ public class Attendance_Students extends AppCompatActivity {
         mytoken = sharedPreferences.getString(CONSTANT.TOKEN,"");
         sendDB = findViewById(R.id.attendance_students_send) ;
         name_tool_bar = findViewById(R.id.add_private_note_tool_bar_tv) ;
-        name_tool_bar.setText(R.string.STUDENTS);
+        name_tool_bar.setText(R.string.CHECK_STUDENTS);
         drawerLayout = findViewById(R.id.absence_drawer) ;
         recyclerView = findViewById(R.id.absence_recycler_students) ;
         adapterAbsenceFromDB = new AdapterAbsenceFromDB() ;
 
+        num_notification = findViewById(R.id.tool_bar_add_private_note_menu_num_notification_tv) ;
+        if(!sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION,"").equals("0")) {
+            num_notification.setVisibility(View.VISIBLE);
+            num_notification.setText(sharedPreferences.getString(CONSTANT.NUM_NOTIFICATION, ""));
+        }
     }
 
+
+    public void ClickNotification(View view)
+    {
+        CONSTANT.redirectActivity(this,ParentsNote.class);
+    }
     public void ClickMenu(View view)
     {
         //Open Drawer

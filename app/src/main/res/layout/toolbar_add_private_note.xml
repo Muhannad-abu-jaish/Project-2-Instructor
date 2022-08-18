@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:background="@color/DarkMagenta"
+    android:background="@color/LemonChiffon"
     android:gravity="center_vertical">
 
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="ISA"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/DarkMagenta"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:background="@drawable/circle_bold"
             android:paddingTop="5sp"
             android:textAlignment="center"
-            android:textColor="@color/Lgary"
+            android:textColor="@color/DarkMagenta"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

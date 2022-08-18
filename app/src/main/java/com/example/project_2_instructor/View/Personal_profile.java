@@ -72,6 +72,12 @@ DrawerLayout drawerLayout;
     }//End of ClickLogo
 
 
+
+    public void ClickNotification(View view)
+    {
+        CONSTANT.redirectActivity(this,ParentsNote.class);
+    }
+
     public static void closeDrawer(DrawerLayout drawerLayout)
     {
         //Close drawer layout

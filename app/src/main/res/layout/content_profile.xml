@@ -18,10 +18,12 @@
 
         <TextView
             style="@style/headerText"
-            android:text="Account Info"
+            android:text="@string/ACCOUNT_INFORMATION"
+            android:layout_gravity="start"
             android:layout_marginBottom="20dp"/>
 
-        <RelativeLayout style="@style/profileDetailsLayout">
+        <RelativeLayout style="@style/profileDetailsLayout"
+            android:gravity="start">
             <ImageView
                 android:id="@+id/nameImageView"
                 android:src="@drawable/ic_name"
@@ -29,89 +31,104 @@
 
             <TextView
                 android:id="@+id/nameTextView"
-                android:text="Full Name"
+                android:text="@string/FULL_NAME"
+                android:textColor="@color/DarkMagenta"
                 android:layout_toEndOf="@id/nameImageView"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
                 android:id="@+id/fullname_student_profile"
+                android:textColor="@color/DarkMagenta"
                 android:layout_toEndOf="@id/nameImageView"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
-        <RelativeLayout style="@style/profileDetailsLayout">
+        <RelativeLayout style="@style/profileDetailsLayout"
+            android:gravity="start">
             <ImageView
                 android:id="@+id/mobileImageView"
+
                 android:src="@drawable/attendance_active"
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="attends Number"
+                android:text="@string/ATTENDANCE_NUMBER"
+                android:textColor="@color/DarkMagenta"
                 android:layout_toEndOf="@id/mobileImageView"
                 style="@style/profileDetailsTextMain"/>
 
             <TextView
                 android:id="@+id/attend_number_student_profile"
                 android:layout_toEndOf="@id/mobileImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
-        <RelativeLayout style="@style/profileDetailsLayout">
+        <RelativeLayout style="@style/profileDetailsLayout"
+            android:gravity="start">
             <ImageView
                 android:id="@+id/emailImageView"
                 android:src="@drawable/ic_email"
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="absence Number"
+                android:text="@string/ABSENCE_NUMCER"
                 android:layout_toEndOf="@id/emailImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
                 android:id="@+id/absence_number_student_profile"
                 android:layout_toEndOf="@id/emailImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
-        <RelativeLayout style="@style/profileDetailsLayout">
+        <RelativeLayout style="@style/profileDetailsLayout"
+            android:gravity="start">
             <ImageView
                 android:id="@+id/addressImageView"
                 android:src="@drawable/age"
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="AGE"
+                android:text="@string/Age"
                 android:layout_toEndOf="@id/addressImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
                 android:id="@+id/age_student_profile"
+                android:textColor="@color/DarkMagenta"
                 android:layout_toEndOf="@id/addressImageView"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
-        <RelativeLayout style="@style/profileDetailsLayout">
+        <RelativeLayout style="@style/profileDetailsLayout"
+            android:gravity="start">
             <ImageView
                 android:id="@+id/dobImageView"
                 android:src="@drawable/birthday"
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="Birth Date"
+                android:text="@string/Birth_Date"
                 android:layout_toEndOf="@id/dobImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
                 android:id="@+id/birth_date_student_profile"
                 android:layout_toEndOf="@id/dobImageView"
+                android:textColor="@color/DarkMagenta"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
@@ -119,24 +136,31 @@
         <View style="@style/proifleDetailsView" />
 
         <RelativeLayout
-            style="@style/profileDetailsLayout">
+            style="@style/profileDetailsLayout"
+            android:gravity="start">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="vertical">
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:layout_margin="10dp"
                     android:layout_height="wrap_content"
-                    android:text="add private note"
+                    android:text="@string/ADD_PRIVATE_NOTE"
+                    android:padding="8dp"
+                    android:textColor="@color/LemonChiffon"
                     android:id="@+id/add_private_note"
-                    android:drawableEnd="@drawable/add"
+                    android:drawableStart="@drawable/add"
                     android:background="@drawable/profile_back_button"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:padding="8dp"
                     android:layout_height="wrap_content"
-                    android:text="add absence warning"
+                    android:textColor="@color/LemonChiffon"
+                    android:text="@string/ADD_ABSENCE_WARNING"
                     android:id="@+id/add_absence_warning"
                     android:drawableStart="@drawable/add"
                     android:background="@drawable/profile_back_button"/>

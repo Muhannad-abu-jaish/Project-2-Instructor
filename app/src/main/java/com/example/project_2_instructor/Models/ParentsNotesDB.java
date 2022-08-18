@@ -13,14 +13,9 @@ import java.util.ArrayList;
 
 public class ParentsNotesDB extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "parents_notes";
     private static final String PARENT_NOTES_TABLE  ="parentsnotetable";
-
-
-    private static final String ABSENCE_TABLE = "absence_table" ;
-    private static final String KEY_CHECK = "check_absence " ;
-    private static final String KEY_SECTION_ID = "sec_id" ;
 
 
     //columns name for database tables
@@ -36,7 +31,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //create table
-        String query = "CREATE TABLE " + PARENT_NOTES_TABLE + "(" + KEY_ID + "INT PRIMARY KEY AUTOINCREMENT,"+
+        String query = "CREATE TABLE " + PARENT_NOTES_TABLE + "(" + KEY_ID + " INTEGER PRIMARY KEY ,"+
                 KEY_STUDENT_NAME + " TEXT,"+
                 KEY_MESSAGE + " TEXT," +
                 KEY_START_DATE + " TEXT" + ")";
@@ -54,7 +49,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
             return;
 
         db.execSQL(" DROP TABLE IF EXISTS " + PARENT_NOTES_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ABSENCE_TABLE);
+
         onCreate(db);
     }
 
@@ -63,6 +58,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         //For write in the data base
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_ID , parentsNotes.getId());
         contentValues.put(KEY_STUDENT_NAME , parentsNotes.getUsername());
         contentValues.put(KEY_MESSAGE , parentsNotes.getMessage());
         contentValues.put(KEY_START_DATE , parentsNotes.getStart_date());
@@ -72,6 +68,28 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         Log.d("inserted", "ID -> " + ID);
 
         return ID;
+    }
+
+
+    public boolean isExists(int id )
+    {
+        //select * from databaseTable where id = 1
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(PARENT_NOTES_TABLE , new String[]{KEY_ID , KEY_STUDENT_NAME , KEY_MESSAGE , KEY_START_DATE }, KEY_ID +"=?" ,
+                new String[]{ String.valueOf(id)},null,null,null);
+
+        if (cursor !=null) {
+            cursor.moveToFirst();
+            return true;
+        }else
+            return false ;
+
+    }
+    public void deleteTable()
+    {
+        SQLiteDatabase db = getWritableDatabase() ;
+        db.execSQL(" DROP TABLE IF EXISTS " + PARENT_NOTES_TABLE);
+        onCreate(db);
     }
 
     public ParentsNotes getParentsNote(long id)

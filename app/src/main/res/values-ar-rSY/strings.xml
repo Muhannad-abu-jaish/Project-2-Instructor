@@ -34,4 +34,28 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="retry">إعادة تحميل</string>
+
+    <string name="CHECK_STUDENTS">تفقد الطلاب</string>
+    <string name="SEND">إرسال</string>
+    <string name="ABSENCE">غائب ؟</string>
+    <string name="SHOW_STUDENTS">عرض الطلاب</string>
+    <string name="RECEIVED_DATE">تاريخ الاستقبال : </string>
+    <string name="CLASS">الصف المسؤول عنه</string>
+    <string name="ACCOUNT_INFORMATION">معلومات الطالب</string>
+
+    <string name="FULL_NAME">اسم الطالب الكامل</string>
+    <string name="ATTENDANCE_NUMBER">عدد مرات الحضور</string>
+    <string name="ABSENCE_NUMCER">عدد مرات الغياب</string>
+    <string name="Age">العمر</string>
+    <string name="Birth_Date">تاريخ الميلاد</string>
+    <string name="ADD_PRIVATE_NOTE">إضافة ملاحظة خاصة</string>
+    <string name="ADD_ABSENCE_WARNING">إضافة إنذار غياب</string>
+    <string name="TITLE">العنوان</string>
+    <string name="ENTER_TITLE">أدخل العنوان</string>
+    <string name="ENTER_NOTE">أدخل نص الملاحظة</string>
+    <string name="EXPIRED_DATE">تاريخ انتهاء الصلاحية</string>
+
+
 </resources>

@@ -7,25 +7,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add absence warning"
-        android:textColor="@color/white"
+        android:text="@string/ADD_ABSENCE_WARNING"
+        android:textColor="@color/LemonChiffon"
         android:layout_gravity="center"
         android:textSize="25dp"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
+
         android:hint="message"
+        android:backgroundTint="@color/LemonChiffon"
         android:id="@+id/send_absence_warning"
-        app:endIconDrawable="@drawable/send_note"
         app:endIconMode="custom"
+        app:endIconDrawable="@drawable/send_note"
         app:endIconContentDescription="send_note"
-        app:startIconDrawable="@drawable/note_add"
-        android:textColorHint="@color/purple_500">
+        app:boxStrokeColor="@color/LemonChiffon"
+        app:endIconTint="@color/LemonChiffon"
+
+        android:textColorHint="@color/LemonChiffon"
+        >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_field_send_warning"  />
     </com.google.android.material.textfield.TextInputLayout>
+
 
 
 

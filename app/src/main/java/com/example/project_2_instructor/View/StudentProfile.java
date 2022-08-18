@@ -187,7 +187,6 @@ SharedPreferences sharedPreferences;
         birthdate_student = findViewById(R.id.birth_date_student_profile);
         bundle = getIntent().getExtras();
         id_student = bundle.getInt(CONSTANT.Id_student);
-        Back = findViewById(R.id.GoBack_profile);
         add_note_private = findViewById(R.id.add_private_note);
         add_absence_warning = findViewById(R.id.add_absence_warning);
         toolbar = findViewById(R.id.toolbar);

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parents_note_drawer_layout"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/Lgary"
     android:layout_height="match_parent"
     tools:context=".View.ParentsNote">
 
@@ -13,14 +14,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/main_toolbar"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/THE_PARENTS_MESSAGES"
-            android:gravity="center"
-            android:textSize="40sp" />
+
         <include layout="@layout/view_no_connection"
-            android:id="@+id/view_NoConnection"
+            android:id="@+id/parent_notes_view_NoConnection"
             android:visibility="gone"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
