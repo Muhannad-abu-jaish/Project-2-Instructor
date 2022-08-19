@@ -105,7 +105,7 @@ public class ParentsNotesDB extends SQLiteOpenHelper {
         return new ParentsNotes(cursor.getInt(0),cursor.getString(1) , cursor.getString(2) , cursor.getString(3));
     }
 
-    public ArrayList<ParentsNotes> getAllPrivateNotes()
+    public ArrayList<ParentsNotes> getAllParentNotes()
     {
         SQLiteDatabase sqLiteDatabase =this.getReadableDatabase();
         ArrayList<ParentsNotes> allPrivateNotes =new ArrayList<>();

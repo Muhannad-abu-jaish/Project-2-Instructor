@@ -88,12 +88,12 @@ public class ParentsNote extends AppCompatActivity {
                 }else{
                     progressBar.setVisibility(View.GONE);
                     try {
-                        if (parentsNotesDB.getAllPrivateNotes().size()==0) {
+                        if (parentsNotesDB.getAllParentNotes().size()==0) {
                             Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
 
                         }else
                         {
-                            adapterParentsNote = new AdapterParentsNote(getApplicationContext(), parentsNotesDB.getAllPrivateNotes());
+                            adapterParentsNote = new AdapterParentsNote(getApplicationContext(), parentsNotesDB.getAllParentNotes());
                             setAdapterParentsNote(adapterParentsNote);
                         }
                         Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
@@ -108,11 +108,11 @@ public class ParentsNote extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 System.out.println("Error : " + t.getMessage());
 
-                if (parentsNotesDB.getAllPrivateNotes().size()==0)
+                if (parentsNotesDB.getAllParentNotes().size()==0)
                   noConnection.setVisibility(View.VISIBLE);
                 else
                 {
-                    parentsNotes = parentsNotesDB.getAllPrivateNotes();
+                    parentsNotes = parentsNotesDB.getAllParentNotes();
                     adapterParentsNote = new AdapterParentsNote(getApplicationContext() , parentsNotes);
                     setAdapterParentsNote(adapterParentsNote);
                 }
